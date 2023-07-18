@@ -13,6 +13,8 @@ const customStyles = {
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   content: {
+    width: "80%",
+    "max-width": "450px",
     position: "absolute",
     top: "50%",
     left: "50%",
@@ -37,12 +39,14 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="flex justify-end gap-3 border-b border-gray pb-3">
-      {token && <Link to="/posts/new">글쓰기</Link>}
-      <Link to={"/"} className="flex items-center text-4xl text-pink-500 font-bold">
-        <h1>8row</h1>
-      </Link>
-      <nav className=" flex items-center gap-3 font-semibold">
+    <header className="flex justify-between gap-3 border-b border-gray pb-3">
+      <div className="w-[30%]">{token && <Link to="/posts/new">글쓰기</Link>}</div>
+      <div>
+        <Link to={"/"} className="flex  items-center text-4xl text-pink-500 font-bold">
+          <h1>8row</h1>
+        </Link>
+      </div>
+      <div className=" flex justify-end items-center gap-3 font-semibold">
         {/* <Link to="/posts">Post</Link> */}
         {token ? (
           <Link to="/profile">내 프로필</Link>
@@ -72,7 +76,7 @@ export default function Navbar() {
             로그인
           </button>
         )}
-      </nav>
+      </div>
       <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} style={customStyles}>
         <div className="">{isSignupLogIn === "login" ? <Login /> : <Signup />}</div>
       </Modal>

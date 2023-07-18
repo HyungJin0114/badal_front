@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import MyProfile from "./pages/MyProfile";
+import Stores from "./pages/Stores";
 
 const router = createBrowserRouter([
   {
@@ -19,10 +20,10 @@ const router = createBrowserRouter([
         path: "/profile",
         element: <MyProfile />,
       },
-      // {
-      //   path: '/posts',
-      //   element: <Posts />,
-      // },
+      {
+        path: "/stores/:storeId",
+        element: <Stores />,
+      },
       // {
       //   path: '/posts/new',
       //   element: <NewPost />,
