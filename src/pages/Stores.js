@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import MenuCard from "../components/MenuCard";
+import CartButton from "../components/CartButton";
 
 const result = {
   name: "가게명",
@@ -88,6 +89,9 @@ export default function Stores() {
             return <MenuCard menu={menu} storeId={storeId} />;
           })}
         </div>
+      </div>
+      <div className="fixed bottom-10 right-10 ">
+        <CartButton />
       </div>
     </div>
   );

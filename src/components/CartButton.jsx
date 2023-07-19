@@ -11,18 +11,31 @@ const customStyles = {
   content: {
     width: "80%",
     "max-width": "450px",
-    height: "500px",
-    "max-height": "800px",
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     backgroundColor: "white",
-    padding: "2rem",
+    padding: "1rem",
+    "padding-left": "2rem",
+    "padding-right": "2rem",
     borderRadius: "0.5rem",
     boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+    animation: "slide-up 0.5s", // 애니메이션 적용
   },
 };
+
+// 슬라이드 업 애니메이션을 위한 CSS 키 프레임 정의
+const slideUpAnimation = `
+    @keyframes slide-up {
+      from {
+        transform: translate(-50%, 100%);
+      }
+      to {
+        transform: translateY(-50%, 0);
+      }
+    }
+  `;
 
 export default function CartButton() {
   const { getTotalCount, cartItems } = useCart();
@@ -33,17 +46,19 @@ export default function CartButton() {
     setTotalPrice(cartItems.reduce((total, item) => total + item.count, 0));
   }, [cartItems]);
   return (
-    <div>
-      <BsCartFill
-        className="text-3xl hover:bg-red-300"
+    <div className="">
+      <div
         onClick={() => {
           setModalIsOpen(true);
         }}
-      />
-      <div>
-        <span>{totalPrice}</span>
+        className="text-red-300 cursor-pointer p-1 text-4xl hover:scale-110 ">
+        <BsCartFill />
+        <div className="absolute bg-black px-2 rounded-full text-xl left-4 bottom-4 text-white">
+          <span>{totalPrice}</span>
+        </div>
       </div>
       <ReactModal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} style={customStyles}>
+        <style>{slideUpAnimation}</style>
         <Cart />
       </ReactModal>
     </div>

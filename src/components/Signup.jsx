@@ -24,7 +24,7 @@ const Signup = () => {
 
   return (
     <div>
-      <h2 className="font-bold mb-4">회원가입</h2>
+      <h2 className="mb-5 mx-auto text-xl font-bold text-center">회원가입</h2>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <input type="text" placeholder="이름" value={name} required onChange={(e) => setName(e.target.value)} />
         <input type="password" placeholder="비밀번호" value={password} required onChange={(e) => setPassword(e.target.value)} />
@@ -35,7 +35,9 @@ const Signup = () => {
         <input type="nickname" placeholder="닉네임" value={nickname} onChange={(e) => setNickname(e.target.value)} />
         {/* <input type="text" placeholder="한줄 자기소개" value={comment} onChange={(e) => setComment(e.target.value)} /> */}
         {/* <input type="email" placeholder="프로필 이미지" value={imgUrl} onChange={(e) => setImgUrl(e.target.value)} /> */}
-        <button type="submit">회원가입</button>
+        <button className="w-[80%] mx-auto bg-pink-300 py-1.5 rounded-2xl font-bold text-white hover:bg-pink-500" type="submit">
+          회원가입
+        </button>
       </form>
     </div>
   );

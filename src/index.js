@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import MyProfile from "./pages/MyProfile";
 import Stores from "./pages/Stores";
+import Payments from "./pages/Payments";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/stores/:storeId",
         element: <Stores />,
+      },
+      {
+        path: "/payments",
+        element: <Payments />,
       },
       // {
       //   path: '/posts/new',

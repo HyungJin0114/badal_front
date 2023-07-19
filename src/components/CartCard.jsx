@@ -3,7 +3,7 @@ import { RiCloseFill } from "react-icons/ri";
 import { TiMinus, TiPlus } from "react-icons/ti";
 import Button from "./ui/Button";
 
-export default function CartCard({ menu }) {
+export default function CartCard({ menu, removeFromCart, increaseCount, decreaseCount }) {
   return (
     <div>
       <div class="py-8 mx-auto flex justify-between items-center bg-white ">
@@ -14,11 +14,11 @@ export default function CartCard({ menu }) {
           </div>
         </div>
         <div className="items-center text-center">
-          <RiCloseFill className="text-3xl ms-11 cursor-pointer hover:text-red-500 " />
+          <RiCloseFill onClick={() => removeFromCart(menu.menuId)} className="text-3xl ms-11 cursor-pointer hover:text-red-500 " />
           <div className="flex flex-row items-center mt-4 gap-3 text-xl">
-            <TiMinus />
+            <TiMinus onClick={() => decreaseCount(menu.menuId)} className="cursor-pointer hover:text-red-500" />
             <p className="">{menu.count}</p>
-            <TiPlus />
+            <TiPlus onClick={() => increaseCount(menu.menuId)} className="cursor-pointer hover:text-red-500" />
           </div>
         </div>
       </div>
