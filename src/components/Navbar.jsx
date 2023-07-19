@@ -60,23 +60,26 @@ export default function Navbar() {
   };
 
   return (
-    <header className="flex justify-around border-b border-gray pb-3">
-      <div>
+    <header className="flex justify-between border-b border-gray pb-3">
+      <div className="w-28">
         <button onClick={goBack} className="text-3xl text-center mx-auto py-1 px-2 rounded-xl font-bold text-pink-300 hover:text-pink-500">
           <MdArrowBackIos />
         </button>
       </div>
-      <div>
-        <Link to={"/"} className="flex items-center text-4xl text-pink-500 font-bold">
+      <div className="">
+        <Link to={"/"} className="flex text-4xl text-pink-500 font-bold">
           <h1>8row</h1>
         </Link>
       </div>
-      <div className=" flex justify-end items-center gap-3 font-semibold">
+      <div className=" flex justify-end items-center gap-3 w-28 font-semibold">
         {/* <Link to="/posts">Post</Link> */}
         {token ? (
-          <Link to="/profile">내 프로필</Link>
+          <Link className="text-black-300 hover:text-pink-500" to="/profile">
+            내 프로필
+          </Link>
         ) : (
           <button
+            className="text-black-300 hover:text-pink-500"
             onClick={() => {
               setModalIsOpen(true);
               setIsSignupLogIn("signup");
@@ -86,6 +89,7 @@ export default function Navbar() {
         )}
         {token ? (
           <button
+            className="text-black-300 hover:text-pink-500"
             onClick={() => {
               Cookies.remove("authorization");
               window.location.reload();
@@ -94,6 +98,7 @@ export default function Navbar() {
           </button>
         ) : (
           <button
+            className="text-black-300 hover:text-pink-500"
             onClick={() => {
               setModalIsOpen(true);
               setIsSignupLogIn("login");
