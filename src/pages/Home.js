@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Category from "../components/Category";
 import StoreCard from "../components/StoreCard";
 
@@ -64,6 +64,14 @@ const datas = [
 ];
 
 export default function Home() {
+  const [result, setResult] = useState();
+
+  useEffect(() => {
+    const response = [];
+
+    setResult();
+  }, []);
+
   return (
     <div>
       <div className="w-full flex justify-center mt-4">

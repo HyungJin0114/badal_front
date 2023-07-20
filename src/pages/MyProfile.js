@@ -26,31 +26,26 @@ export default function MyProfile() {
           <div className="flex flex-col">
             <p className="font-bold">이름</p> <span className="ms-10">{user.name}</span>
           </div>
-          <Button text={"변경"}></Button>
         </div>
         <div className="flex flex-row  items-center text-lg justify-between">
           <div className="flex flex-col">
             <p className="font-bold">비밀번호</p> <span className="ms-10">{"************"}</span>
           </div>
-          <Button text={"변경"}></Button>
         </div>
         <div className="flex flex-row  items-center text-lg justify-between">
           <div className="flex flex-col">
             <p className="font-bold">닉네임</p> <span className="ms-10">{user.nickname}</span>
           </div>
-          <Button text={"변경"}></Button>
         </div>
         <div className="flex flex-row  items-center text-lg justify-between">
           <div className="flex flex-col">
             <p className="font-bold">전화번호</p> <span className="ms-10">{user.phoneNumber}</span>
           </div>
-          <Button text={"변경"}></Button>
         </div>
         <div className="flex flex-row  items-center text-lg justify-between">
           <div className="flex flex-col">
             <p className="font-bold">포인트</p> <span className="ms-10">{user.point}P</span>
           </div>
-          <Button text={"변경"}></Button>
         </div>
         <div className="flex flex-row  items-center text-lg justify-between">
           <div className="flex flex-col">
