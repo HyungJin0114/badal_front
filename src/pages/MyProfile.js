@@ -4,6 +4,7 @@ import { useAuthContext } from "../context/AuthContext";
 import Loading from "../components/Loading";
 import Button from "../components/ui/Button";
 import StoreInfo from "../components/StoreInfo";
+import Ordered from "../components/Ordered";
 
 export default function MyProfile() {
   const { user, isLoading } = useAuthContext();
@@ -64,11 +65,9 @@ export default function MyProfile() {
         {!user.isAdmin && (
           <div>
             <div className="border-b-2 border-slate-300 mb-5"></div>
-            <h1 className="my-3 text-center content-center text-2xl">
-              <span className="font-bold">{user.name}</span>님의 주문내역
-            </h1>
           </div>
         )}
+        <Ordered isAdmin={user.isAdmin} user={user} />
       </div>
     );
   }

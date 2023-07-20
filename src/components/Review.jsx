@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdArrowBackIos } from "react-icons/md";
 import ReviewCard from "./ReviewCard";
+import axios from "axios";
 
 const result = [
   {
@@ -26,9 +27,20 @@ const result = [
 ];
 
 export default function Review({ storeId, modalIsOpen, setModalIsOpen }) {
+  const [review, setReview] = useState(result);
   const goBack = () => {
     setModalIsOpen(false);
   };
+
+  useEffect(() => {
+    const getReview = async () => {
+      try {
+        const response = await axios.get(`${process.env.test_url}/api/stores/${storeId}/reviews`);
+        console.log(response.json());
+      } catch (error) {}
+    };
+    getReview();
+  });
   return (
     <div className="flex flex-col">
       <div className="flex flex-row justify-around">
@@ -39,7 +51,7 @@ export default function Review({ storeId, modalIsOpen, setModalIsOpen }) {
         <h1 className="font-bold text-xl w-fit text-white">{"리뷰"}</h1>
       </div>
       <div className="flex flex-col">
-        {result.map((item) => {
+        {review.map((item) => {
           return <ReviewCard review={item} key={item.content} />;
         })}
       </div>
