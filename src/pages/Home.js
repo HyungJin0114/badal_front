@@ -72,7 +72,7 @@ export default function Home() {
       <Category />
       <div className="flex flex-col gap-4">
         {datas.map((data) => {
-          return <StoreCard id={data.id} category={data.category} img={data.img} location={data.location} name={data.name} key={data.name} />;
+          return <StoreCard id={data.id} category={data.category} img={data.img} location={data.location} name={data.name} key={data.id} />;
         })}
       </div>
     </div>

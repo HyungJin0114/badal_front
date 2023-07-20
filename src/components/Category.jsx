@@ -7,7 +7,7 @@ export default function Category() {
     <div className="flex flex-row my-3 mx-auto overflow-hidden">
       {count.map((item) => {
         return (
-          <div className="">
+          <div className="" key={item}>
             <CategoryCard category={item} />
           </div>
         );

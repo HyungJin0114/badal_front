@@ -6,11 +6,11 @@ import Button from "./ui/Button";
 export default function CartCard({ menu, removeFromCart, increaseCount, decreaseCount }) {
   return (
     <div>
-      <div class="py-8 mx-auto flex justify-between items-center bg-white ">
-        <div class="flex flex-row">
-          <div class="flex flex-col gap-6">
-            <p class="text-lg text-black font-semibold">{menu.menuName}</p>
-            <p class="text-slate-500 font-medium">{menu.price}원</p>
+      <div className="py-8 mx-auto flex justify-between items-center bg-white ">
+        <div className="flex flex-row">
+          <div className="flex flex-col gap-6">
+            <p className="text-lg text-black font-semibold">{menu.menuName}</p>
+            <p className="text-slate-500 font-medium">{menu.price}원</p>
           </div>
         </div>
         <div className="items-center text-center">

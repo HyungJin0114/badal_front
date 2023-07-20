@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import MenuCard from "../components/MenuCard";
 import CartButton from "../components/CartButton";

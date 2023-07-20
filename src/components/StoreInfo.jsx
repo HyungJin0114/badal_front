@@ -48,6 +48,7 @@ const result = null;
 
 export default function StoreInfo() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  //   const [isPostRequest, setIsPostRequest] = useState(true);
 
   if (!result) {
     return (
@@ -56,7 +57,7 @@ export default function StoreInfo() {
         <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} style={customStyles}>
           <style>{slideUpAnimation}</style>
           <div className="">
-            <NewStore />
+            <NewStore requestType={true} />
           </div>
         </Modal>
       </div>
@@ -68,27 +69,34 @@ export default function StoreInfo() {
         <div className="flex flex-col">
           <p className="font-bold">가게명</p> <span className="ms-10">{result.name}</span>
         </div>
-        <Button text={"변경"}></Button>
       </div>
       <div className="flex flex-row  items-center text-lg justify-between">
         <div className="flex flex-col">
           <p className="font-bold">지역명</p> <span className="ms-10">{result.location}</span>
         </div>
-        <Button text={"변경"}></Button>
       </div>
       <div className="flex flex-row  items-center text-lg justify-between">
         <div className="flex flex-col">
           <p className="font-bold">카테고리</p> <span className="ms-10">{result.category}</span>
         </div>
-        <Button text={"변경"}></Button>
       </div>
       <div className="flex flex-row  items-center text-lg justify-between">
         <div className="flex flex-col">
           <p className="font-bold">이미지</p> <span className="ms-10">{result.name}</span>
           {/* <image src={} /> */}
         </div>
-        <Button text={"변경"}></Button>
+        <Button
+          onClick={() => {
+            setModalIsOpen(true);
+          }}
+          text={"변경"}></Button>
       </div>
+      <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} style={customStyles}>
+        <style>{slideUpAnimation}</style>
+        <div className="">
+          <NewStore requestType={false} />
+        </div>
+      </Modal>
     </div>
   );
 }
