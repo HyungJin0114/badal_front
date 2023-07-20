@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RiCloseFill } from "react-icons/ri";
 import { TiMinus, TiPlus } from "react-icons/ti";
 import Cart from "../components/Cart";
 import { useCart } from "../context/CartContext";
+import { Link } from "react-router-dom";
+import Button from "../components/ui/Button";
 
 export default function Payments() {
   const { cartItems, addToCart, decreaseCount, increaseCount, removeFromCart, getTotalCount, getTotalPrice } = useCart();
+  const [totalPrice, setTotalPrice] = useState(getTotalPrice());
 
-  return <Cart />;
+  useEffect(() => {
+    setTotalPrice(getTotalPrice);
+  }, [cartItems]);
+
+  const onClickPaymentsBtn = async () => {};
+  return (
+    <div>
+      <Cart />{" "}
+      {totalPrice !== 0 && (
+        <button onClick={onClickPaymentsBtn} className="flex w-fit text-xl text-center mx-auto py-1 px-2 rounded-xl font-bold text-white bg-pink-300 hover:bg-pink-500">
+          {totalPrice + "원 주문하기"}
+        </button>
+      )}
+    </div>
+  );
 }

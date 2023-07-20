@@ -1,13 +1,38 @@
 import React, { useState } from "react";
 // import { loginUser } from '../api/auth';
+import Cookies from "js-cookie";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // loginUser(email, password);
+    const userData = { email, password };
+
+    try {
+      const response = await fetch("http://localhost:3002/api/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      console.log(response.status);
+      if (response.status === 200) {
+        const data = await response.json();
+        alert(data.result.message);
+        Cookies.set("Authorization", `Bearer ${data.result.token}`, { expires: 1 });
+        window.location.reload();
+      } else {
+        const data = await response.json();
+        alert(data.message);
+      }
+    } catch (error) {
+      alert(error);
+      console.error("Error occurred during signup:", error);
+    }
   };
 
   return (

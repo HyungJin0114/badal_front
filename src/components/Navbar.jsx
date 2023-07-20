@@ -46,12 +46,12 @@ const slideUpAnimation = `
 Modal.setAppElement("#root"); // App 요소 설정
 
 export default function Navbar() {
-  const [token, setToken] = useState(Cookies.get("authorization"));
+  const [token, setToken] = useState(Cookies.get("Authorization"));
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isSignupLogIn, setIsSignupLogIn] = useState("login");
 
   useEffect(() => {
-    const storedToken = Cookies.get("authorization");
+    const storedToken = Cookies.get("Authorization");
     setToken(storedToken);
   }, []);
 
@@ -61,7 +61,7 @@ export default function Navbar() {
 
   return (
     <header className="flex justify-between border-b border-gray pb-3">
-      <div className="w-28">
+      <div className="w-32">
         <button onClick={goBack} className="text-3xl text-center mx-auto py-1 px-2 rounded-xl font-bold text-pink-300 hover:text-pink-500">
           <MdArrowBackIos />
         </button>
@@ -71,11 +71,11 @@ export default function Navbar() {
           <h1>8row</h1>
         </Link>
       </div>
-      <div className=" flex justify-end items-center gap-3 w-28 font-semibold">
+      <div className=" flex justify-end items-center gap-2 w-32 font-semibold">
         {/* <Link to="/posts">Post</Link> */}
         {token ? (
           <Link className="text-black-300 hover:text-pink-500" to="/profile">
-            내 프로필
+            프로필
           </Link>
         ) : (
           <button
@@ -91,7 +91,7 @@ export default function Navbar() {
           <button
             className="text-black-300 hover:text-pink-500"
             onClick={() => {
-              Cookies.remove("authorization");
+              Cookies.remove("Authorization");
               window.location.reload();
             }}>
             로그아웃

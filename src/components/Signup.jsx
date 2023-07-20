@@ -30,12 +30,24 @@ const Signup = () => {
         body: JSON.stringify(userData),
       });
 
-      const data = await response.json();
-      alert(data.message);
+      if (response.status === 201) {
+        const data = await response.json();
+        alert(data.message);
+        window.location.reload();
+      } else {
+        const data = await response.json();
+        alert(data.message);
+        setConfirm("");
+        setEmail("");
+        setIsAdmin(false);
+        setName("");
+        setNickname("");
+        setPassword("");
+        setPhoneNumber("");
+      }
 
       // 회원가입 성공 시 로그인 처리?
       // alert(data.userData.nickname, "님의 회원가입 완료!");
-      // window.location.reload();
     } catch (error) {
       alert(error.message);
       console.error("Error occurred during signup:", error);

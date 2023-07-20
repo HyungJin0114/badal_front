@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import MyProfile from "./pages/MyProfile";
 import Stores from "./pages/Stores";
 import Payments from "./pages/Payments";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,11 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       {
         path: "/profile",
-        element: <MyProfile />,
+        element: (
+          <ProtectedRoute>
+            <MyProfile />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/stores/:storeId",
@@ -27,7 +32,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/payments",
-        element: <Payments />,
+        element: (
+          <ProtectedRoute>
+            <Payments />
+          </ProtectedRoute>
+        ),
       },
       // {
       //   path: '/posts/new',

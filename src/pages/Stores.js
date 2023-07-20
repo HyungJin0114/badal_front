@@ -1,7 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import MenuCard from "../components/MenuCard";
 import CartButton from "../components/CartButton";
+import Modal from "react-modal";
+import Review from "../components/Review";
+
+const customStyles = {
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  content: {
+    width: "80%",
+    "max-width": "450px",
+    position: "absolute",
+    height: "500px",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: "white",
+    padding: "1rem",
+    "padding-left": "2rem",
+    "padding-right": "2rem",
+    borderRadius: "0.5rem",
+    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+    animation: "slide-up 0.5s", // 애니메이션 적용
+  },
+};
+
+// 슬라이드 업 애니메이션을 위한 CSS 키 프레임 정의
+const slideUpAnimation = `
+  @keyframes slide-up {
+    from {
+      transform: translate(-50%, 100%);
+    }
+    to {
+      transform: translateY(-50%, 0);
+    }
+  }
+`;
 
 const result = {
   name: "가게명",
@@ -64,13 +100,14 @@ const menues = [
 
 export default function Stores() {
   const { storeId } = useParams();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   return (
     <div className="w-full">
       <div className="flex flex-col gap-4  border-b-2 pb-4">
         <img className="rounded-t-xl mx-0 w-full max-h-40" src={result.img} alt="" />
         <h1 className="text-2xl font-bold mx-3">{result.name}</h1>
-        <p className="font-semibold w-fit mx-3 cursor-pointer transition hover:translate-x-2">
+        <p onClick={() => setModalIsOpen(true)} className="font-semibold w-fit mx-3 cursor-pointer transition hover:translate-x-2">
           ⭐ 4.2 <span className="text-slate-500 ">{"리뷰 >"}</span>
         </p>
       </div>
@@ -93,6 +130,10 @@ export default function Stores() {
       <div className="fixed bottom-10 right-10 ">
         <CartButton />
       </div>
+      <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} style={customStyles}>
+        <style>{slideUpAnimation}</style>
+        <Review storeId={storeId} modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} />
+      </Modal>
     </div>
   );
 }
