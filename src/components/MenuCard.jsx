@@ -8,7 +8,7 @@ export default function MenuCard({ menu, storeId }) {
   const { addToCart } = useCart();
   const handleAddCart = () => {
     const newItem = {
-      menuId: menu.menuId,
+      menuId: menu.id,
       menuName: menu.menuName,
       price: menu.price,
       count: 1,
