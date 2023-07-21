@@ -35,8 +35,14 @@ export default function Review({ storeId, modalIsOpen, setModalIsOpen }) {
   useEffect(() => {
     const getReview = async () => {
       try {
-        const response = await axios.get(`${process.env.test_url}/api/stores/${storeId}/reviews`);
-        console.log(response.json());
+        const response = await axios.get(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${storeId}/reviews`, {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        console.log(data);
       } catch (error) {}
     };
     getReview();
