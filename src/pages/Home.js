@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Category from "../components/Category";
 import StoreCard from "../components/StoreCard";
+import axios from "axios";
 
 const datas = [
   {
@@ -67,9 +68,21 @@ export default function Home() {
   const [result, setResult] = useState();
 
   useEffect(() => {
-    const response = [];
+    const getAllStores = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_SERVERURL}/api/stores/`, {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
-    setResult();
+        if (response.status === 200) {
+          setResult(response.data.result);
+        }
+      } catch (error) {}
+    };
+    getAllStores();
   }, []);
 
   return (
@@ -79,9 +92,10 @@ export default function Home() {
       </div>
       <Category />
       <div className="flex flex-col gap-4">
-        {datas.map((data) => {
-          return <StoreCard id={data.id} category={data.category} img={data.img} location={data.location} name={data.name} key={data.id} />;
-        })}
+        {result &&
+          result.map((data) => {
+            return <StoreCard id={data.id} category={data.category} img={data.img} location={data.location} name={data.name} key={data.id} />;
+          })}
       </div>
     </div>
   );

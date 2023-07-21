@@ -4,6 +4,7 @@ import MenuCard from "../components/MenuCard";
 import CartButton from "../components/CartButton";
 import Modal from "react-modal";
 import Review from "../components/Review";
+import axios from "axios";
 
 const customStyles = {
   overlay: {
@@ -101,6 +102,28 @@ const menues = [
 export default function Stores() {
   const { storeId } = useParams();
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [reviews, setReview] = useState([]);
+
+  useEffect(() => {
+    const getReview = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${storeId}/reviews`, {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.status === 200) {
+          console.log(response);
+          const data = await response.data;
+          setReview(data.result);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    getReview();
+  }, []);
 
   return (
     <div className="w-full">
@@ -132,7 +155,7 @@ export default function Stores() {
       </div>
       <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} style={customStyles}>
         <style>{slideUpAnimation}</style>
-        <Review storeId={storeId} modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} />
+        <Review reviews={reviews} storeId={storeId} modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} />
       </Modal>
     </div>
   );

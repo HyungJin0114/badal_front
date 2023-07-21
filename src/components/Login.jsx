@@ -19,7 +19,6 @@ const Login = () => {
         body: JSON.stringify(userData),
       });
 
-      console.log(response.status);
       if (response.status === 200) {
         const data = await response.json();
         alert(data.result.message);

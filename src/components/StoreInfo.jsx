@@ -62,8 +62,7 @@ export default function StoreInfo() {
           },
         });
         if (response.status === 200) {
-          console.log(response);
-          const data = response.json();
+          const data = response;
           setResult(data.result);
         } else {
           const data = response.json();
@@ -72,7 +71,7 @@ export default function StoreInfo() {
       } catch (error) {}
     };
     getStore();
-  });
+  }, []);
 
   if (!result) {
     return (

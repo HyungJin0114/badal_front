@@ -23,7 +23,7 @@ export default function Ordered({ user, isAdmin }) {
     if (isAdmin) {
       getOrders(5);
     }
-  });
+  }, []);
   return (
     <div>
       <h1 className="my-3 text-center content-center text-2xl">

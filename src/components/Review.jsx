@@ -26,27 +26,11 @@ const result = [
   },
 ];
 
-export default function Review({ storeId, modalIsOpen, setModalIsOpen }) {
-  const [review, setReview] = useState(result);
+export default function Review({ reviews, storeId, modalIsOpen, setModalIsOpen }) {
   const goBack = () => {
     setModalIsOpen(false);
   };
 
-  useEffect(() => {
-    const getReview = async () => {
-      try {
-        const response = await axios.get(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${storeId}/reviews`, {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const data = await response.json();
-        console.log(data);
-      } catch (error) {}
-    };
-    getReview();
-  });
   return (
     <div className="flex flex-col">
       <div className="flex flex-row justify-around">
@@ -56,10 +40,12 @@ export default function Review({ storeId, modalIsOpen, setModalIsOpen }) {
         <h1 className="font-bold text-xl w-fit">{"리뷰"}</h1>
         <h1 className="font-bold text-xl w-fit text-white">{"리뷰"}</h1>
       </div>
+      {/* {!review && <div>리뷰가 아직 없습니다.</div>} */}
       <div className="flex flex-col">
-        {review.map((item) => {
-          return <ReviewCard review={item} key={item.content} />;
-        })}
+        {reviews &&
+          reviews.map((item) => {
+            return <ReviewCard review={item} key={item.content} />;
+          })}
       </div>
     </div>
   );
