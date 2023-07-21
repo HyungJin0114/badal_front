@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./ui/Button";
 import Modal from "react-modal";
 import NewStore from "./NewStore";
+import axios from "axios";
 
 const customStyles = {
   overlay: {
@@ -49,6 +50,29 @@ const result = null;
 export default function StoreInfo() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   //   const [isPostRequest, setIsPostRequest] = useState(true);
+  const [result, setResult] = useState();
+
+  useEffect(() => {
+    const getStore = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${5}`, {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.status === 200) {
+          console.log(response);
+          const data = response.json();
+          setResult(data.result);
+        } else {
+          const data = response.json();
+          alert(data.message);
+        }
+      } catch (error) {}
+    };
+    getStore();
+  });
 
   if (!result) {
     return (

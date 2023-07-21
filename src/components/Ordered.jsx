@@ -1,18 +1,27 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 
 export default function Ordered({ user, isAdmin }) {
-  const [review, setReview] = useState();
+  const [orders, setOrders] = useState();
 
   useEffect(() => {
-    const getReview = async (id) => {
+    const getOrders = async (id) => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${id}/orders`);
-        console.log(response.json());
-      } catch (error) {}
+        const response = await axios.get(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${id}/orders`, {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        console.log(response);
+        const data = await response.json();
+      } catch (error) {
+        console.log(error.message);
+      }
     };
     if (isAdmin) {
-      getReview(4);
+      getOrders(5);
     }
   });
   return (

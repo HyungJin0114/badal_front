@@ -52,6 +52,10 @@ const CartProvider = ({ children }) => {
     setCartItems(updatedCart);
   };
 
+  const removeMyCart = () => {
+    setCartItems([]);
+  };
+
   // 장바구니 내 메뉴 개수를 총합 계산하는 함수
   const getTotalCount = () => {
     return cartItems.reduce((total, item) => total + item.count, 0);
@@ -66,11 +70,13 @@ const CartProvider = ({ children }) => {
     <CartContext.Provider
       value={{
         cartItems,
+        cartStoreId,
         addToCart,
         decreaseCount,
         increaseCount,
         removeFromCart,
         getTotalCount,
+        removeMyCart,
         getTotalPrice,
       }}>
       {children}
