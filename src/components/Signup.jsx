@@ -10,6 +10,7 @@ const Signup = () => {
   const [nickname, setNickname] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [location, setLocation] = useState("");
+  const [newStore, setNewStore] = useState({});
   const [imgUrl, setImgUrl] = useState("");
 
   const handleSubmit = async (e) => {
@@ -71,6 +72,15 @@ const Signup = () => {
           <span className="me-5">사장님이세요?</span>
           <input type="checkbox" placeholder="사장님이세요?" value={isAdmin} onChange={(e) => setIsAdmin(e.target.checked)} />
         </div>
+        {isAdmin && (
+          <div>
+            <input type="text" placeholder="name" value={newStore.name} onChange={(e) => setNewStore({ name: e.target.value })} />
+            <input type="text" placeholder="storePhoneNumber" value={newStore.storePhoneNumber} onChange={(e) => setNewStore({ storePhoneNumber: e.target.value })} />
+            <input type="text" placeholder="category" value={newStore.category} onChange={(e) => setNewStore({ category: e.target.value })} />
+            <input type="text" placeholder="location" value={newStore.location} onChange={(e) => setNewStore({ location: e.target.value })} />
+            <input type="text" placeholder="image" value={newStore.image} onChange={(e) => setNewStore({ image: e.target.value })} />
+          </div>
+        )}
         {/* <input type="email" placeholder="프로필 이미지" value={imgUrl} onChange={(e) => setImgUrl(e.target.value)} /> */}
         <button className="w-[80%] mx-auto bg-pink-300 py-1.5 rounded-2xl font-bold text-white hover:bg-pink-500" type="submit">
           회원가입

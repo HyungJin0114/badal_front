@@ -5,9 +5,11 @@ import Loading from "../components/Loading";
 import Button from "../components/ui/Button";
 import StoreInfo from "../components/StoreInfo";
 import Ordered from "../components/Ordered";
+import { Link } from "react-router-dom";
 
 export default function MyProfile() {
-  const { user, isLoading } = useAuthContext();
+  const { user, isLoading, myStore } = useAuthContext();
+  console.log("aaaaa", user.isAdmin);
 
   // 컴포넌트가 마운트될 때 사용자 데이터를 가져옵니다.
 
@@ -57,17 +59,18 @@ export default function MyProfile() {
         <div className="border-b-2 border-slate-300 mb-5"></div>
         {user.isAdmin && (
           <div>
-            <h1 className="text-center text-xl font-bold">{`${user.name}님의 가게 정보`}</h1>
-            <StoreInfo />
+            <h1 className="text-center text-xl font-bold">{`${myStore.name}님의 가게 정보`}</h1>
+            <StoreInfo storeId={myStore.id} />
             <div className="border-b-2 border-slate-300 my-5"></div>
           </div>
         )}
-        {!user.isAdmin && (
+        {user && (
           <div>
-            <div className="border-b-2 border-slate-300 mb-5"></div>
+            <Link to={`/ordered`} className="font-bold hover:text-pink-300">
+              나의 주문내역
+            </Link>
           </div>
         )}
-        <Ordered isAdmin={user.isAdmin} user={user} />
       </div>
     );
   }

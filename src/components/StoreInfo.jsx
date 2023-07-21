@@ -3,6 +3,8 @@ import Button from "./ui/Button";
 import Modal from "react-modal";
 import NewStore from "./NewStore";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { useAuthContext } from "../context/AuthContext";
 
 const customStyles = {
   overlay: {
@@ -38,16 +40,9 @@ const slideUpAnimation = `
     }
   `;
 
-// const result = {
-//   id: 1,
-//   name: "가게명",
-//   location: "지역명1",
-//   category: "한식",
-//   img: "https://res.cloudinary.com/dyhnnmhcf/image/upload/v1689592865/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2023-07-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_8.20.58_ophrmz.png",
-// };
-const result = null;
-
 export default function StoreInfo() {
+  const { myStore } = useAuthContext();
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   //   const [isPostRequest, setIsPostRequest] = useState(true);
   const [result, setResult] = useState();
@@ -55,17 +50,18 @@ export default function StoreInfo() {
   useEffect(() => {
     const getStore = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${5}`, {
+        const response = await axios.get(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${myStore.id}`, {
           withCredentials: true,
           headers: {
             "Content-Type": "application/json",
           },
         });
         if (response.status === 200) {
-          const data = response;
+          const { data } = response;
           setResult(data.result);
         } else {
           const data = response.json();
+          setResult();
           alert(data.message);
         }
       } catch (error) {}
@@ -108,6 +104,9 @@ export default function StoreInfo() {
           <p className="font-bold">이미지</p> <span className="ms-10">{result.name}</span>
           {/* <image src={} /> */}
         </div>
+        <Link to={`/stores/${result.id}`}>
+          <Button text={"가게로가기"} />
+        </Link>
         <Button
           onClick={() => {
             setModalIsOpen(true);

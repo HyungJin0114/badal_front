@@ -5,7 +5,7 @@ import Loading from "../components/Loading";
 
 export default function ProtectedRoute({ children, requireAdmin }) {
   const { user, isLoading } = useAuthContext();
-  console.log(user);
+
   if (isLoading) {
     return <Loading />;
   }

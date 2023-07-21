@@ -10,6 +10,8 @@ import MyProfile from "./pages/MyProfile";
 import Stores from "./pages/Stores";
 import Payments from "./pages/Payments";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import Ordered from "./pages/OrderedPage";
+import OrderedPage from "./pages/OrderedPage";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +37,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <Payments />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/ordered",
+        element: (
+          <ProtectedRoute>
+            <OrderedPage />
           </ProtectedRoute>
         ),
       },

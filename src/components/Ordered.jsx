@@ -1,9 +1,11 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
+import { useAuthContext } from "../context/AuthContext";
 
-export default function Ordered({ user, isAdmin }) {
+export default function Ordered() {
   const [orders, setOrders] = useState();
+  const { myStore, user } = useAuthContext();
 
   useEffect(() => {
     const getOrders = async (id) => {
@@ -14,20 +16,25 @@ export default function Ordered({ user, isAdmin }) {
             "Content-Type": "application/json",
           },
         });
-        console.log(response);
-        const data = await response.json();
+        const { data } = await response;
+        setOrders(data.result);
       } catch (error) {
         console.log(error.message);
       }
     };
-    if (isAdmin) {
-      getOrders(5);
+    if (user.isAdmin) {
+      getOrders(myStore.id);
     }
   }, []);
   return (
     <div>
       <h1 className="my-3 text-center content-center text-2xl">
         <span className="font-bold">{user.name}</span>님의 주문내역 보기
+        {orders &&
+          orders.map((order) => {
+            return <div key={order.id}>{order[0]}</div>;
+          })}
+        {!orders && <div>주문내역이 없습니다.</div>}
       </h1>
     </div>
   );
