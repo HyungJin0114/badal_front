@@ -1,10 +1,8 @@
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import Button from "./ui/Button";
 import { useCart } from "../context/CartContext";
 
 export default function MenuCard({ menu, storeId }) {
-  const navigate = useNavigate();
   const { addToCart } = useCart();
   const handleAddCart = () => {
     const newItem = {
@@ -29,7 +27,7 @@ export default function MenuCard({ menu, storeId }) {
           <Button text={"주문하기"} onClick={handleAddCart} />
         </div>
       </div>
-      <div classNameName="w-[80%] mx-auto border-b-2"></div>
+      <div className="w-[80%] mx-auto border-b-2"></div>
     </div>
   );
 }

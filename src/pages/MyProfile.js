@@ -1,10 +1,8 @@
-import Cookies from "js-cookie";
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { useAuthContext } from "../context/AuthContext";
 import Loading from "../components/Loading";
 import Button from "../components/ui/Button";
 import StoreInfo from "../components/StoreInfo";
-import Ordered from "../components/Ordered";
 import { Link } from "react-router-dom";
 
 export default function MyProfile() {

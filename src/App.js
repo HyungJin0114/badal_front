@@ -2,9 +2,8 @@ import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import CartProvider from "./context/CartContext";
-import CartButton from "./components/CartButton";
 import { useEffect } from "react";
-import { AuthContextProvider, AuthProvider } from "./context/AuthContext";
+import { AuthContextProvider } from "./context/AuthContext";
 
 function ScrollToTop() {
   const { pathname } = useLocation();

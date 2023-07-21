@@ -45,7 +45,7 @@ const slideUpAnimation = `
 `;
 
 export default function Stores() {
-  const { user, isLoading, myStore } = useAuthContext();
+  const { myStore } = useAuthContext();
 
   const { storeId } = useParams();
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -137,7 +137,7 @@ export default function Stores() {
           <div className="flex flex-col gap-3">
             {menu &&
               menu.map((menu) => {
-                return <MenuCard menu={menu} storeId={storeId} />;
+                return <MenuCard key={menu.id} menu={menu} storeId={storeId} />;
               })}
           </div>
         </div>

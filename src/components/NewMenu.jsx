@@ -19,7 +19,7 @@ export default function MenuUpload() {
 
     try {
       const formData = new FormData();
-      formData.append("name", name);
+      formData.append("menuName", name);
       formData.append("price", price);
       formData.append("description", description);
       formData.append("image", image);

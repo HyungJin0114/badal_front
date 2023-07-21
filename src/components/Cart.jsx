@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useCart } from "../context/CartContext";
-import MenuCard from "./MenuCard";
 import CartCard from "./CartCard";
-import Button from "./ui/Button";
-import { Link } from "react-router-dom";
 
 export default function Cart({ setModalIsOpen }) {
-  const { cartItems, addToCart, decreaseCount, increaseCount, removeFromCart, getTotalCount, getTotalPrice } = useCart();
+  const { cartItems, decreaseCount, increaseCount, removeFromCart, getTotalPrice } = useCart();
   const [totalPrice, setTotalPrice] = useState(getTotalPrice);
   useEffect(() => {
     setTotalPrice(getTotalPrice);
@@ -39,7 +36,7 @@ export default function Cart({ setModalIsOpen }) {
         {cartItems.map((item) => {
           return (
             <>
-              <CartCard menu={item} decreaseCount={decreaseCount} increaseCount={increaseCount} removeFromCart={removeFromCart} />
+              <CartCard menu={item} decreaseCount={decreaseCount} increaseCount={increaseCount} totalPrice={totalPrice} removeFromCart={removeFromCart} />
             </>
           );
         })}

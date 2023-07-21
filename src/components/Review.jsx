@@ -1,30 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { MdArrowBackIos } from "react-icons/md";
 import ReviewCard from "./ReviewCard";
-import axios from "axios";
-
-const result = [
-  {
-    nickname: "닉네임1",
-    content: "악플 달지마1",
-    rating: "1",
-  },
-  {
-    nickname: "닉네임2",
-    content: "악플 달지마2",
-    rating: "4",
-  },
-  {
-    nickname: "닉네임3",
-    content: "악플 달지마3",
-    rating: "4",
-  },
-  {
-    nickname: "닉네임4",
-    content: "악플 달지마4",
-    rating: "2",
-  },
-];
 
 export default function Review({ reviews, storeId, modalIsOpen, setModalIsOpen }) {
   const goBack = () => {
@@ -44,7 +20,7 @@ export default function Review({ reviews, storeId, modalIsOpen, setModalIsOpen }
       <div className="flex flex-col">
         {reviews &&
           reviews.map((item) => {
-            return <ReviewCard review={item} key={item.content} />;
+            return <ReviewCard key={item.id} review={item} />;
           })}
       </div>
     </div>

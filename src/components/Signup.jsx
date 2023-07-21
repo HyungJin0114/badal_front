@@ -11,7 +11,6 @@ const Signup = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [location, setLocation] = useState("");
   const [newStore, setNewStore] = useState({});
-  const [imgUrl, setImgUrl] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();

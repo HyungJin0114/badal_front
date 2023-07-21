@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { RiCloseFill } from "react-icons/ri";
-import { TiMinus, TiPlus } from "react-icons/ti";
 import Cart from "../components/Cart";
 import { useCart } from "../context/CartContext";
-import { Link } from "react-router-dom";
-import Button from "../components/ui/Button";
 import axios from "axios";
 
 export default function Payments() {
-  const { cartItems, cartStoreId, removeMyCart, addToCart, decreaseCount, increaseCount, removeFromCart, getTotalCount, getTotalPrice } = useCart();
+  const { cartItems, cartStoreId, getTotalPrice } = useCart();
   const [totalPrice, setTotalPrice] = useState(getTotalPrice());
 
   useEffect(() => {
