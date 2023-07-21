@@ -17,12 +17,16 @@ export default function Payments() {
 
   const onClickPaymentsBtn = async () => {
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${cartStoreId}/orders`, cartItems, {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_SERVERURL}/api/stores/${cartStoreId}/orders`,
+        { orderList: cartItems },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.status === 200) {
         const data = await response.json();
@@ -32,7 +36,7 @@ export default function Payments() {
         console.log(data.message);
       }
     } catch (error) {}
-    removeMyCart();
+    // removeMyCart();
   };
   return (
     <div>
