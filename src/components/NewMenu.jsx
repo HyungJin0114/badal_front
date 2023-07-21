@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useAuthContext } from "../context/AuthContext";
 
 export default function MenuUpload() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
+  const { myStore } = useAuthContext();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -22,7 +24,7 @@ export default function MenuUpload() {
       formData.append("description", description);
       formData.append("image", image);
 
-      await axios.post("http://localhost:3002/api/stores/2/menus", formData, {
+      await axios.post(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${myStore.id}/menus`, formData, {
         withCredentials: true,
         headers: {
           "Content-Type": "multipart/form-data",
