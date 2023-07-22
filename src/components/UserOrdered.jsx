@@ -9,7 +9,23 @@ export default function UserOrdered() {
   const { user } = useAuthContext();
 
   useEffect(() => {
-    const getOrderedFromUser = async () => {};
+    const getOrderedFromUser = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_SERVERURL}/api/orders`, {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (response.status === 200) {
+          setOrders(response.data.result);
+        } else {
+          alert('뭔가가 이상해');
+        }
+      } catch (error) {
+        console.log('오류발생!');
+      }
+    };
 
     getOrderedFromUser();
   }, []);
@@ -43,12 +59,7 @@ export default function UserOrdered() {
                 <div className="flex mx-auto w-fit">
                   {!order.delivered && (
                     <div>
-                      {/* <Button
-                          className="mx-auto w-fit"
-                          text={'배송완료하기'}
-                          onClick={() => onClickPatchDeliverBtn(order.id)}
-                        /> */}
-                      {/* <Button className="mx-auto w-fit" text={'주문취소'} onClick={() => onClickDeleteBtn(order.id)} /> */}
+                      <p>배송중</p>
                     </div>
                   )}
                   {order.delivered && <p>배송완료됐습니다.</p>}
