@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createContext, useContext, useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 const AuthContext = createContext();
 
@@ -20,12 +21,10 @@ export function AuthContextProvider({ children }) {
           'Content-Type': 'application/json',
         },
       });
-      console.log(response);
 
       const { data } = await response;
       if (response.status === 202) {
         if (data.store !== null) {
-          console.log(data);
           setMyStore(data.store);
         } else {
           setMyStore({});
@@ -39,8 +38,9 @@ export function AuthContextProvider({ children }) {
       setUser(data.user); // 사용자 정보를 받아와서 컨텍스트의 user 상태를 업데이트합니다.
       setIsLoading(false);
     } catch (error) {
-      setMyStore({});
-      setUser({});
+      setMyStore(null);
+      setUser(null);
+      setIsLoading(false);
       console.log('사용자 데이터를 가져오는 중 오류가 발생했습니다:', error);
     }
   };

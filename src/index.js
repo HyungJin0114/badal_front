@@ -12,6 +12,7 @@ import Payments from './pages/Payments';
 import ProtectedRoute from './pages/ProtectedRoute';
 import Ordered from './pages/OrderedPage';
 import OrderedPage from './pages/OrderedPage';
+import UserOrderedPage from './pages/UserOrderedPage';
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <OrderedPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/userOrdered',
+        element: (
+          <ProtectedRoute>
+            <UserOrderedPage />
           </ProtectedRoute>
         ),
       },

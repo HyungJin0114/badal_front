@@ -86,7 +86,7 @@ export default function NewStore({ requestType }) {
         }
         text={requestType ? '생성하기' : '변경하기'}
       />
-      {requestType && <Button onClick={onClickDelBtn} text={'삭제'} />}
+      {!requestType && <Button onClick={onClickDelBtn} text={'삭제'} />}
     </div>
   );
 }

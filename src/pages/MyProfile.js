@@ -9,7 +9,8 @@ export default function MyProfile() {
   const { user, isLoading, myStore } = useAuthContext();
   console.log('aaaaa', user.isAdmin);
 
-  // 컴포넌트가 마운트될 때 사용자 데이터를 가져옵니다.
+  // 유저 업데이트 버튼
+  const onClickUserUpdateBtn = () => {};
 
   if (isLoading) {
     return <Loading></Loading>;
@@ -52,7 +53,7 @@ export default function MyProfile() {
           <div className="flex flex-col">
             <p className="font-bold">이름</p> <span className="ms-10">{user.name}</span>
           </div>
-          <Button text={'변경'}></Button>
+          <Button text={'변경'} onClick={onClickUserUpdateBtn}></Button>
         </div>
         <div className="border-b-2 border-slate-300 mb-5"></div>
         {user.isAdmin && (
@@ -62,9 +63,16 @@ export default function MyProfile() {
             <div className="border-b-2 border-slate-300 my-5"></div>
           </div>
         )}
-        {user && (
+        {user && user.isAdmin && (
           <div>
             <Link to={`/ordered`} className="font-bold hover:text-pink-300">
+              나의 가게 주문내역
+            </Link>
+          </div>
+        )}
+        {user && (
+          <div>
+            <Link to={`/userOrdered`} className="font-bold hover:text-pink-300">
               나의 주문내역
             </Link>
           </div>
