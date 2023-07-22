@@ -1,31 +1,31 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 // import { onclickEmailConfirmBtn, signupUser } from "../api/auth";
 
 const Signup = () => {
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirm, setConfirm] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [nickname, setNickname] = useState("");
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [nickname, setNickname] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState('');
   const [newStore, setNewStore] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirm) {
-      alert("비빌번호를 확인해주세요!");
-      setPassword("");
-      setConfirm("");
+      alert('비빌번호를 확인해주세요!');
+      setPassword('');
+      setConfirm('');
       return;
     }
     const userData = { name, password, confirmPassword: confirm, email, phoneNumber, nickname, isAdmin, location };
     try {
-      const response = await fetch("http://localhost:3002/api/signup", {
-        method: "POST",
+      const response = await fetch('http://localhost:3002/api/signup', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(userData),
       });
@@ -37,20 +37,20 @@ const Signup = () => {
       } else {
         const data = await response.json();
         alert(data.message);
-        setConfirm("");
-        setEmail("");
+        setConfirm('');
+        setEmail('');
         setIsAdmin(false);
-        setName("");
-        setNickname("");
-        setPassword("");
-        setPhoneNumber("");
+        setName('');
+        setNickname('');
+        setPassword('');
+        setPhoneNumber('');
       }
 
       // 회원가입 성공 시 로그인 처리?
       // alert(data.userData.nickname, "님의 회원가입 완료!");
     } catch (error) {
       alert(error.message);
-      console.error("Error occurred during signup:", error);
+      console.error('Error occurred during signup:', error);
     }
     // signupUser(nickname, password, confirm, email, emailConfirm, comment, imgUrl);
   };

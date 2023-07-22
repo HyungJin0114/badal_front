@@ -1,13 +1,13 @@
-import React from "react";
-import { useAuthContext } from "../context/AuthContext";
-import Loading from "../components/Loading";
-import Button from "../components/ui/Button";
-import StoreInfo from "../components/StoreInfo";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { useAuthContext } from '../context/AuthContext';
+import Loading from '../components/Loading';
+import Button from '../components/ui/Button';
+import StoreInfo from '../components/StoreInfo';
+import { Link } from 'react-router-dom';
 
 export default function MyProfile() {
   const { user, isLoading, myStore } = useAuthContext();
-  console.log("aaaaa", user.isAdmin);
+  console.log('aaaaa', user.isAdmin);
 
   // 컴포넌트가 마운트될 때 사용자 데이터를 가져옵니다.
 
@@ -30,7 +30,7 @@ export default function MyProfile() {
         </div>
         <div className="flex flex-row  items-center text-lg justify-between">
           <div className="flex flex-col">
-            <p className="font-bold">비밀번호</p> <span className="ms-10">{"************"}</span>
+            <p className="font-bold">비밀번호</p> <span className="ms-10">{'************'}</span>
           </div>
         </div>
         <div className="flex flex-row  items-center text-lg justify-between">
@@ -52,7 +52,7 @@ export default function MyProfile() {
           <div className="flex flex-col">
             <p className="font-bold">이름</p> <span className="ms-10">{user.name}</span>
           </div>
-          <Button text={"변경"}></Button>
+          <Button text={'변경'}></Button>
         </div>
         <div className="border-b-2 border-slate-300 mb-5"></div>
         {user.isAdmin && (

@@ -1,27 +1,27 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import NotFound from "./pages/NotFound";
-import Home from "./pages/Home";
-import MyProfile from "./pages/MyProfile";
-import Stores from "./pages/Stores";
-import Payments from "./pages/Payments";
-import ProtectedRoute from "./pages/ProtectedRoute";
-import Ordered from "./pages/OrderedPage";
-import OrderedPage from "./pages/OrderedPage";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import NotFound from './pages/NotFound';
+import Home from './pages/Home';
+import MyProfile from './pages/MyProfile';
+import Stores from './pages/Stores';
+import Payments from './pages/Payments';
+import ProtectedRoute from './pages/ProtectedRoute';
+import Ordered from './pages/OrderedPage';
+import OrderedPage from './pages/OrderedPage';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
     errorElement: <NotFound />,
     children: [
       { index: true, element: <Home /> },
       {
-        path: "/profile",
+        path: '/profile',
         element: (
           <ProtectedRoute>
             <MyProfile />
@@ -29,11 +29,11 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/stores/:storeId",
+        path: '/stores/:storeId',
         element: <Stores />,
       },
       {
-        path: "/payments",
+        path: '/payments',
         element: (
           <ProtectedRoute>
             <Payments />
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/ordered",
+        path: '/ordered',
         element: (
           <ProtectedRoute>
             <OrderedPage />
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<RouterProvider router={router} />);
 
 // If you want to start measuring performance in your app, pass a function

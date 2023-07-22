@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import Category from "../components/Category";
-import StoreCard from "../components/StoreCard";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import Category from '../components/Category';
+import StoreCard from '../components/StoreCard';
+import axios from 'axios';
 
 export default function Home() {
   const [result, setResult] = useState();
@@ -12,7 +12,7 @@ export default function Home() {
         const response = await axios.get(`${process.env.REACT_APP_API_SERVERURL}/api/stores/`, {
           withCredentials: true,
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
         });
 

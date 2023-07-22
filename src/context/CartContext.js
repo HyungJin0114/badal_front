@@ -1,6 +1,6 @@
 // cartContext.js
 
-import React, { useState, useContext } from "react";
+import React, { useState, useContext } from 'react';
 
 // 초기 장바구니 상태
 const initialCartItems = [];
@@ -16,7 +16,7 @@ const CartProvider = ({ children }) => {
     if (!cartStoreId) {
       setCartStoreId(storeId);
     } else if (storeId !== cartStoreId) {
-      alert("같은 가게의 메뉴만 카트에 담을 수 있습니다. 이전 카트를 초기화 합니다.");
+      alert('같은 가게의 메뉴만 카트에 담을 수 있습니다. 이전 카트를 초기화 합니다.');
       await setCartItems([newItem]);
       await setCartStoreId(storeId);
 
@@ -78,7 +78,8 @@ const CartProvider = ({ children }) => {
         getTotalCount,
         removeMyCart,
         getTotalPrice,
-      }}>
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
@@ -87,7 +88,7 @@ const CartProvider = ({ children }) => {
 export const useCart = () => {
   const context = useContext(CartContext);
   if (!context) {
-    throw new Error("useCart must be used within a CartProvider");
+    throw new Error('useCart must be used within a CartProvider');
   }
   return context;
 };

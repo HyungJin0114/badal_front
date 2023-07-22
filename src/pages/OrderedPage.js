@@ -1,5 +1,5 @@
-import React from "react";
-import Ordered from "../components/Ordered";
+import React from 'react';
+import Ordered from '../components/Ordered';
 
 export default function OrderedPage() {
   return (

@@ -1,5 +1,5 @@
-import axios from "axios";
-import { createContext, useContext, useEffect, useState } from "react";
+import axios from 'axios';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 const AuthContext = createContext();
 
@@ -17,7 +17,7 @@ export function AuthContextProvider({ children }) {
       const response = await axios.get(`${process.env.REACT_APP_API_SERVERURL}/api/me`, {
         withCredentials: true,
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
       console.log(response);
@@ -41,7 +41,7 @@ export function AuthContextProvider({ children }) {
     } catch (error) {
       setMyStore({});
       setUser({});
-      console.log("사용자 데이터를 가져오는 중 오류가 발생했습니다:", error);
+      console.log('사용자 데이터를 가져오는 중 오류가 발생했습니다:', error);
     }
   };
 

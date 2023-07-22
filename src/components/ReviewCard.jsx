@@ -1,6 +1,6 @@
-import React from "react";
-import BorderBarUi from "./ui/BorderBarUi";
-import { AiFillStar } from "react-icons/ai";
+import React from 'react';
+import BorderBarUi from './ui/BorderBarUi';
+import { AiFillStar } from 'react-icons/ai';
 
 export default function ReviewCard({ review }) {
   return (

@@ -1,9 +1,9 @@
-import { Outlet, useLocation } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import CartProvider from "./context/CartContext";
-import { useEffect } from "react";
-import { AuthContextProvider } from "./context/AuthContext";
+import { Outlet, useLocation } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import CartProvider from './context/CartContext';
+import { useEffect } from 'react';
+import { AuthContextProvider } from './context/AuthContext';
 
 function ScrollToTop() {
   const { pathname } = useLocation();

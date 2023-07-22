@@ -1,30 +1,30 @@
-import React, { useEffect, useState } from "react";
-import Button from "./ui/Button";
-import Modal from "react-modal";
-import NewStore from "./NewStore";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import { useAuthContext } from "../context/AuthContext";
+import React, { useEffect, useState } from 'react';
+import Button from './ui/Button';
+import Modal from 'react-modal';
+import NewStore from './NewStore';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { useAuthContext } from '../context/AuthContext';
 
 const customStyles = {
   overlay: {
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   content: {
-    width: "80%",
-    maxWidth: "450px",
-    position: "absolute",
-    height: "450px",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    backgroundColor: "white",
-    padding: "1rem",
-    paddingLeft: "2rem",
-    paddingRight: "2rem",
-    borderRadius: "0.5rem",
-    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
-    animation: "slide-up 0.5s", // 애니메이션 적용
+    width: '80%',
+    maxWidth: '450px',
+    position: 'absolute',
+    height: '450px',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: 'white',
+    padding: '1rem',
+    paddingLeft: '2rem',
+    paddingRight: '2rem',
+    borderRadius: '0.5rem',
+    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+    animation: 'slide-up 0.5s', // 애니메이션 적용
   },
 };
 
@@ -53,7 +53,7 @@ export default function StoreInfo() {
         const response = await axios.get(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${myStore.id}`, {
           withCredentials: true,
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
         });
         if (response.status === 200) {
@@ -72,7 +72,7 @@ export default function StoreInfo() {
   if (!result) {
     return (
       <div className="mx-auto w-fit my-3">
-        <Button onClick={() => setModalIsOpen(true)} text={"가게 생성하기"}></Button>
+        <Button onClick={() => setModalIsOpen(true)} text={'가게 생성하기'}></Button>
         <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} style={customStyles}>
           <style>{slideUpAnimation}</style>
           <div className="">
@@ -105,13 +105,14 @@ export default function StoreInfo() {
           {/* <image src={} /> */}
         </div>
         <Link to={`/stores/${result.id}`}>
-          <Button text={"가게로가기"} />
+          <Button text={'가게로가기'} />
         </Link>
         <Button
           onClick={() => {
             setModalIsOpen(true);
           }}
-          text={"변경"}></Button>
+          text={'변경'}
+        ></Button>
       </div>
       <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} style={customStyles}>
         <style>{slideUpAnimation}</style>

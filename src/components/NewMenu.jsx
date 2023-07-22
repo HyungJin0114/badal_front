@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useAuthContext } from "../context/AuthContext";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useAuthContext } from '../context/AuthContext';
 
 export default function MenuUpload({ requestType, menuId }) {
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState('');
+  const [description, setDescription] = useState('');
   const [image, setImage] = useState(null);
   const { myStore } = useAuthContext();
-  console.log(menuId)
+  console.log(menuId);
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setImage(file);
@@ -19,36 +19,34 @@ export default function MenuUpload({ requestType, menuId }) {
 
     try {
       const formData = new FormData();
-      formData.append("menuName", name);
-      formData.append("price", price);
-      formData.append("description", description);
-      formData.append("image", image);
-      console.log(requestType)
-      if(requestType === "POST"){
+      formData.append('menuName', name);
+      formData.append('price', price);
+      formData.append('description', description);
+      formData.append('image', image);
+      console.log(requestType);
+      if (requestType === 'POST') {
         await axios.post(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${myStore.id}/menus`, formData, {
           withCredentials: true,
           headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
           },
         });
-  
-        alert("메뉴가 업로드되었습니다.");
+
+        alert('메뉴가 업로드되었습니다.');
         // 성공적으로 업로드 후 처리할 로직을 작성하세요.
-      }else{
+      } else {
         await axios.put(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${myStore.id}/menus/${menuId}`, formData, {
           withCredentials: true,
           headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
           },
         });
-  
-        alert("메뉴가 수정되었습니다.");
+
+        alert('메뉴가 수정되었습니다.');
         // 성공적으로 업로드 후 처리할 로직을 작성하세요.
       }
-
-    
     } catch (error) {
-      alert("메뉴 업로드에 실패했습니다.");
+      alert('메뉴 업로드에 실패했습니다.');
       console.error(error);
     }
   };
@@ -73,12 +71,12 @@ export default function MenuUpload({ requestType, menuId }) {
           <label>이미지</label>
           <input type="file" onChange={handleImageChange} required />
         </div>
-        {requestType === "POST" && (
+        {requestType === 'POST' && (
           <button className="text-xl font-bold mt-4" type="submit">
             업로드
           </button>
         )}
-        {requestType === "PUT" && (
+        {requestType === 'PUT' && (
           <button className="text-xl font-bold mt-4" type="submit">
             수정하기
           </button>

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useCart } from "../context/CartContext";
-import CartCard from "./CartCard";
+import React, { useEffect, useState } from 'react';
+import { useCart } from '../context/CartContext';
+import CartCard from './CartCard';
 
 export default function Cart({ setModalIsOpen }) {
   const { cartItems, decreaseCount, increaseCount, removeFromCart, getTotalPrice } = useCart();

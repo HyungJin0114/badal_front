@@ -1,7 +1,7 @@
-import React from "react";
-import { RiCloseFill } from "react-icons/ri";
-import { TiMinus, TiPlus } from "react-icons/ti";
-import Button from "./ui/Button";
+import React from 'react';
+import { RiCloseFill } from 'react-icons/ri';
+import { TiMinus, TiPlus } from 'react-icons/ti';
+import Button from './ui/Button';
 
 export default function CartCard({ menu, removeFromCart, increaseCount, decreaseCount }) {
   return (

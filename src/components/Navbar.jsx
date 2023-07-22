@@ -1,33 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Modal from "react-modal";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Modal from 'react-modal';
 // import Login from "./Login";
 // import Signup from "./Signup";
 // import "../styles/nav.css";
-import { MdArrowBackIos } from "react-icons/md";
-import Cookies from "js-cookie";
-import Login from "./Login";
-import Signup from "./Signup";
+import { MdArrowBackIos } from 'react-icons/md';
+import Cookies from 'js-cookie';
+import Login from './Login';
+import Signup from './Signup';
 
 const customStyles = {
   overlay: {
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   content: {
-    width: "80%",
-    "max-width": "450px",
-    position: "absolute",
-    height: "450px",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    backgroundColor: "white",
-    padding: "1rem",
-    "padding-left": "2rem",
-    "padding-right": "2rem",
-    borderRadius: "0.5rem",
-    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
-    animation: "slide-up 0.5s", // 애니메이션 적용
+    width: '80%',
+    'max-width': '450px',
+    position: 'absolute',
+    height: '450px',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: 'white',
+    padding: '1rem',
+    'padding-left': '2rem',
+    'padding-right': '2rem',
+    borderRadius: '0.5rem',
+    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+    animation: 'slide-up 0.5s', // 애니메이션 적용
   },
 };
 
@@ -43,15 +43,15 @@ const slideUpAnimation = `
   }
 `;
 
-Modal.setAppElement("#root"); // App 요소 설정
+Modal.setAppElement('#root'); // App 요소 설정
 
 export default function Navbar() {
-  const [token, setToken] = useState(Cookies.get("Authorization"));
+  const [token, setToken] = useState(Cookies.get('Authorization'));
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [isSignupLogIn, setIsSignupLogIn] = useState("login");
+  const [isSignupLogIn, setIsSignupLogIn] = useState('login');
 
   useEffect(() => {
-    const storedToken = Cookies.get("Authorization");
+    const storedToken = Cookies.get('Authorization');
     setToken(storedToken);
   }, []);
 
@@ -67,7 +67,7 @@ export default function Navbar() {
         </button>
       </div>
       <div className="">
-        <Link to={"/"} className="flex text-4xl text-pink-500 font-bold">
+        <Link to={'/'} className="flex text-4xl text-pink-500 font-bold">
           <h1>8row</h1>
         </Link>
       </div>
@@ -82,8 +82,9 @@ export default function Navbar() {
             className="text-black-300 hover:text-pink-500"
             onClick={() => {
               setModalIsOpen(true);
-              setIsSignupLogIn("signup");
-            }}>
+              setIsSignupLogIn('signup');
+            }}
+          >
             회원가입
           </button>
         )}
@@ -91,9 +92,10 @@ export default function Navbar() {
           <button
             className="text-black-300 hover:text-pink-500"
             onClick={() => {
-              Cookies.remove("Authorization");
+              Cookies.remove('Authorization');
               window.location.reload();
-            }}>
+            }}
+          >
             로그아웃
           </button>
         ) : (
@@ -101,15 +103,16 @@ export default function Navbar() {
             className="text-black-300 hover:text-pink-500"
             onClick={() => {
               setModalIsOpen(true);
-              setIsSignupLogIn("login");
-            }}>
+              setIsSignupLogIn('login');
+            }}
+          >
             로그인
           </button>
         )}
       </div>
       <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} style={customStyles}>
         <style>{slideUpAnimation}</style>
-        <div className="">{isSignupLogIn === "login" ? <Login /> : <Signup />}</div>
+        <div className="">{isSignupLogIn === 'login' ? <Login /> : <Signup />}</div>
       </Modal>
     </header>
   );

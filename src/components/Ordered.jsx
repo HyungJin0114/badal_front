@@ -1,8 +1,8 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useAuthContext } from "../context/AuthContext";
-import BorderBarUi from "./ui/BorderBarUi";
-import Button from "./ui/Button";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useAuthContext } from '../context/AuthContext';
+import BorderBarUi from './ui/BorderBarUi';
+import Button from './ui/Button';
 
 export default function Ordered() {
   const [orders, setOrders] = useState();
@@ -16,18 +16,18 @@ export default function Ordered() {
         {
           withCredentials: true,
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
         }
       );
       if (response.status === 200) {
-        alert("배송완료 완료!");
+        alert('배송완료 완료!');
         window.location.reload();
       } else {
-        alert("뭔가가 이상해");
+        alert('뭔가가 이상해');
       }
     } catch (error) {
-      console.log("오류발생!");
+      console.log('오류발생!');
     }
   };
 
@@ -39,7 +39,7 @@ export default function Ordered() {
         const response = await axios.get(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${id}/orders`, {
           withCredentials: true,
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
         });
         const { data } = await response;
@@ -84,8 +84,8 @@ export default function Ordered() {
                 <div className="flex mx-auto w-fit">
                   {!order.delivered && (
                     <div>
-                      <Button className="mx-auto w-fit" text={"배송완료하기"} onClick={() => onClickPatchDeliverBtn(order.id)} />
-                      <Button className="mx-auto w-fit" text={"주문취소"} onClick={() => onClickDeleteBtn(order.id)} />
+                      <Button className="mx-auto w-fit" text={'배송완료하기'} onClick={() => onClickPatchDeliverBtn(order.id)} />
+                      <Button className="mx-auto w-fit" text={'주문취소'} onClick={() => onClickDeleteBtn(order.id)} />
                     </div>
                   )}
                   {order.delivered && <p>배송완료됐습니다.</p>}
