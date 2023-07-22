@@ -17,7 +17,7 @@ export default function MenuCard({ menu, storeId }) {
   return (
     <div>
       <div className="py-8 px-2 sm:px-8 mx-auto flex flex-row bg-white ">
-        <img className="block mx-0 w-[120px] rounded-xl" src={menu.image} alt="Woman's Face" />
+        <img className="block mx-0 w-[120px] h-[80px] rounded-xl" src={`${menu.image}`} alt="menu" />
         <div className="text-center mx-4 my-auto">
           <div className="space-y-0.5">
             <p className="text-lg text-black font-semibold">{menu.menuName}</p>

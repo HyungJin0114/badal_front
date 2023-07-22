@@ -8,7 +8,7 @@ export default function Ordered() {
   const { myStore, user } = useAuthContext();
 
   useEffect(() => {
-    const getOrders = async (id) => {
+    const getOwnerOrdered = async (id) => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${id}/orders`, {
           withCredentials: true,
@@ -24,13 +24,16 @@ export default function Ordered() {
       }
     };
     if (user.isAdmin) {
-      getOrders(myStore.id);
+      getOwnerOrdered(myStore.id);
+    } else {
     }
   }, []);
+
   return (
     <div>
-      <h1 className="my-3 text-center ">
-        <span className="font-bold content-center text-2xl">{user.name}</span>님의 주문내역 보기
+      {user.isAdmin && <h1 className="font-bold text-xl">사장님 주문내역</h1>}
+      <div className="my-3 text-center ">
+        <span className="font-bold content-center text-2xl">{myStore.name}</span>가게 주문내역 보기
         {orders &&
           orders.map((order) => {
             return (
@@ -43,8 +46,8 @@ export default function Ordered() {
               </div>
             );
           })}
-        {!orders && <div>주문내역이 없습니다.</div>}
-      </h1>
+        {(!orders || orders.length === 0) && <div>주문내역이 없습니다.</div>}
+      </div>
     </div>
   );
 }

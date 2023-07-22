@@ -27,6 +27,7 @@ export default function Payments() {
       if (response.status === 200) {
         const data = await response.json();
         alert(data.message);
+        window.location.href("/");
       } else {
         const data = await response.json();
         console.log(data.message);
