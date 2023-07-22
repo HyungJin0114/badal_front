@@ -3,6 +3,7 @@ import Button from "./ui/Button";
 import { useCart } from "../context/CartContext";
 import Modal from "react-modal";
 import NewMenu from "../components/NewMenu";
+import axios from "axios";
 
 const customStyles = {
   overlay: {
@@ -59,7 +60,29 @@ export default function MenuCard({ menu, admin, storeId }) {
   };
 
   // 메뉴 삭제버튼
-  const onClickDelMenuBtn = async () => {};
+  const onClickDelMenuBtn = async () => {
+    try {
+      axios.delete(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${storeId}/menus/${menu.id}`,{ withCredentials: true,})
+        .then(function (response) {
+          // handle success
+          console.log(response);
+          alert("메뉴가 삭제되었습니다.");
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+          alert("삭제오류")
+        })
+
+      window.location.reload();
+
+      // 성공적으로 업로드 후 처리할 로직을 작성하세요.
+    } catch (error) {
+      alert("메뉴 삭제에 실패했습니다.");
+
+      console.error(error);
+    }
+  };
   return (
     <div>
       <div className="py-8 px-2 sm:px-8 mx-auto flex flex-row bg-white ">
@@ -78,7 +101,7 @@ export default function MenuCard({ menu, admin, storeId }) {
       <div className="w-[80%] mx-auto border-b-2"></div>
       <Modal isOpen={menuModalIsOpen} onRequestClose={() => setMenuModalIsOpen(false)} style={customStyles}>
         <style>{slideUpAnimation}</style>
-        <NewMenu requestType={"PUT"} />
+        <NewMenu requestType={"PUT"} menuId = {menu.id} />
       </Modal>
     </div>
   );
