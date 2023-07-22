@@ -24,10 +24,9 @@ export default function Payments() {
         }
       );
 
-      if (response.status === 200) {
-        const data = await response.json();
-        alert(data.message);
-        window.location.href("/");
+      if (response.status) {
+        alert("주문이 완료됐습니다!");
+        window.location.reload();
       } else {
         const data = await response.json();
         console.log(data.message);
