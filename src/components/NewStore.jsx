@@ -47,7 +47,7 @@ export default function NewStore({ requestType }) {
       formData.append('storePhoneNumber', storePhoneNumber);
       formData.append('image', image);
 
-      await axios.put(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${myStore.id}`, formData, {
+      await axios.patch(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${myStore.id}`, formData, {
         withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data',
