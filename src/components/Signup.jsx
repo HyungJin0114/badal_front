@@ -25,21 +25,16 @@ const Signup = ({ isUpdateProfile }) => {
     const userData = { name, password, confirmPassword: confirm, email, phoneNumber, nickname, isAdmin, location };
     try {
       if (isUpdateProfile) {
-        // 회원 정보 변경
-        // 클릭하면 여기로
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('email', email);
-        formData.append('phoneNumber', phoneNumber);
-        formData.append('nickname', nickname);
-        formData.append('location', location);
-
-        await axios.put(`${process.env.REACT_APP_API_SERVERURL}/api/me`, formData, {
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
+        await axios.put(
+          `${process.env.REACT_APP_API_SERVERURL}/api/me`,
+          { name, email, phoneNumber, nickname, location },
+          {
+            withCredentials: true,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
 
         alert('내 정보가 수정되었습니다.');
         // 성공적으로 업로드 후 처리할 로직을 작성하세요.
