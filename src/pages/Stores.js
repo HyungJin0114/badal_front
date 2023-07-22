@@ -137,7 +137,7 @@ export default function Stores() {
           <div className="flex flex-col gap-3">
             {menu &&
               menu.map((menu) => {
-                return <MenuCard key={menu.id} menu={menu} storeId={storeId} />;
+                return <MenuCard key={menu.id} admin={myStore && myStore.id === storeInfo.id} menu={menu} storeId={storeId} />;
               })}
           </div>
         </div>
@@ -150,7 +150,7 @@ export default function Stores() {
         </Modal>
         <Modal isOpen={menuModalIsOpen} onRequestClose={() => setMenuModalIsOpen(false)} style={customStyles}>
           <style>{slideUpAnimation}</style>
-          <NewMenu />
+          <NewMenu requestType={"POST"} />
         </Modal>
       </div>
     );

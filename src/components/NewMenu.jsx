@@ -41,7 +41,7 @@ export default function MenuUpload({ requestType }) {
 
   return (
     <div className="flex flex-col gap-5">
-      <h2 className="font-bold text-center mx-auto w-fit text-xl">메뉴 업로드</h2>
+      <h2 className="font-bold text-center mx-auto w-fit text-xl">메뉴 ${requestType}</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label>메뉴 이름</label>
@@ -59,8 +59,16 @@ export default function MenuUpload({ requestType }) {
           <label>이미지</label>
           <input type="file" onChange={handleImageChange} required />
         </div>
-        {requestType === "POST" && <button type="submit">업로드</button>}
-        {requestType === "PUT" && <button type="submit">업로드</button>}
+        {requestType === "POST" && (
+          <button className="text-xl font-bold mt-4" type="submit">
+            업로드
+          </button>
+        )}
+        {requestType === "PUT" && (
+          <button className="text-xl font-bold mt-4" type="submit">
+            수정하기
+          </button>
+        )}
       </form>
     </div>
   );
