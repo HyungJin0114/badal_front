@@ -31,7 +31,23 @@ export default function Ordered() {
     }
   };
 
-  const onClickDeleteBtn = (orderId) => {};
+  const onClickDeleteBtn = (orderId) => {
+    axios
+      .delete(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${myStore.id}/orders/${orderId}`, {
+        withCredentials: true,
+      })
+      .then(function (response) {
+        // handle success
+        console.log(response);
+        alert('주문이 취소되었습니다.');
+        window.location.reload();
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+        alert('주문 취소 오류');
+      });
+  };
 
   useEffect(() => {
     const getOwnerOrdered = async (id) => {
@@ -84,7 +100,11 @@ export default function Ordered() {
                 <div className="flex mx-auto w-fit">
                   {!order.delivered && (
                     <div>
-                      <Button className="mx-auto w-fit" text={'배송완료하기'} onClick={() => onClickPatchDeliverBtn(order.id)} />
+                      <Button
+                        className="mx-auto w-fit"
+                        text={'배송완료하기'}
+                        onClick={() => onClickPatchDeliverBtn(order.id)}
+                      />
                       <Button className="mx-auto w-fit" text={'주문취소'} onClick={() => onClickDeleteBtn(order.id)} />
                     </div>
                   )}
