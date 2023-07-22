@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie';
 import React, { useState } from 'react';
+import axios from 'axios';
 // import { onclickEmailConfirmBtn, signupUser } from "../api/auth";
 
 const Signup = ({ isUpdateProfile }) => {
@@ -26,6 +27,22 @@ const Signup = ({ isUpdateProfile }) => {
       if (isUpdateProfile) {
         // 회원 정보 변경
         // 클릭하면 여기로
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('phoneNumber', phoneNumber);
+        formData.append('nickname', nickname);
+        formData.append('location', location);
+
+        await axios.put(`${process.env.REACT_APP_API_SERVERURL}/api/me`, formData, {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        alert('내 정보가 수정되었습니다.');
+        // 성공적으로 업로드 후 처리할 로직을 작성하세요.
       } else {
         // 회원가입
         const response = await fetch('http://localhost:3002/api/signup', {
@@ -74,26 +91,55 @@ const Signup = ({ isUpdateProfile }) => {
       <h2 className="mb-5 mx-auto text-xl font-bold text-center"> {isUpdateProfile ? '회원정보 변경' : '회원가입'}</h2>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <input type="text" placeholder="이름" value={name} required onChange={(e) => setName(e.target.value)} />
-        <input type="password" placeholder="비밀번호" value={password} required onChange={(e) => setPassword(e.target.value)} />
-        <input type="password" placeholder="비밀번호 확인" value={confirm} required onChange={(e) => setConfirm(e.target.value)} />
+        <input
+          type="password"
+          placeholder="비밀번호"
+          value={password}
+          required
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="비밀번호 확인"
+          value={confirm}
+          required
+          onChange={(e) => setConfirm(e.target.value)}
+        />
         <input type="email" placeholder="이메일" value={email} required onChange={(e) => setEmail(e.target.value)} />
-        <input type="text" placeholder="휴대폰번호" value={phoneNumber} required onChange={(e) => setPhoneNumber(e.target.value)} />
+        <input
+          type="text"
+          placeholder="휴대폰번호"
+          value={phoneNumber}
+          required
+          onChange={(e) => setPhoneNumber(e.target.value)}
+        />
         {/* <input type="text" placeholder="이메일 인증" value={emailConfirm} required onChange={(e) => setEmailConfirm(e.target.value)} /> */}
         <input type="nickname" placeholder="닉네임" value={nickname} onChange={(e) => setNickname(e.target.value)} />
         <input type="text" placeholder="지역" value={location} onChange={(e) => setLocation(e.target.value)} />
         {!isUpdateProfile && (
           <div>
             <span className="me-5">사장님이세요?</span>
-            <input type="checkbox" placeholder="사장님이세요?" value={isAdmin} onChange={(e) => setIsAdmin(e.target.checked)} />
+            <input
+              type="checkbox"
+              placeholder="사장님이세요?"
+              value={isAdmin}
+              onChange={(e) => setIsAdmin(e.target.checked)}
+            />
           </div>
         )}
         {/* <input type="email" placeholder="프로필 이미지" value={imgUrl} onChange={(e) => setImgUrl(e.target.value)} /> */}
-        <button className="w-[80%] mx-auto bg-pink-300 py-1.5 rounded-2xl font-bold text-white hover:bg-pink-500" type="submit">
+        <button
+          className="w-[80%] mx-auto bg-pink-300 py-1.5 rounded-2xl font-bold text-white hover:bg-pink-500"
+          type="submit"
+        >
           {isUpdateProfile ? '회원정보 변경' : '회원가입'}
         </button>
       </form>
       {isUpdateProfile && (
-        <button className="my-3 w-[80%] mx-auto bg-pink-300 py-1.5 rounded-2xl font-bold text-white hover:bg-pink-500" onClick={onClickDelBtn}>
+        <button
+          className="my-3 w-[80%] mx-auto bg-pink-300 py-1.5 rounded-2xl font-bold text-white hover:bg-pink-500"
+          onClick={onClickDelBtn}
+        >
           {'회원 삭제'}
         </button>
       )}
