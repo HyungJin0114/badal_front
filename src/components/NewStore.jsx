@@ -64,27 +64,18 @@ export default function NewStore({ requestType }) {
     }
   };
 
-  const onClickDelBtn = () => {};
+  const onClickDelBtn = (e) => {
+    e.preventDefault();
+    console.log('딜리트버튼 누르면');
+  };
 
   return (
     <div className="flex flex-col gap-5">
       <h1 className="font-bold text-center mx-auto w-fit text-xl">가게 {requestType ? '생성하기' : '변경하기'}</h1>
       <input type="text" placeholder="이름" value={name} required onChange={(e) => setName(e.target.value)} />
       <input type="text" placeholder="위치" value={location} required onChange={(e) => setLocation(e.target.value)} />
-      <input
-        type="text"
-        placeholder="전화번호"
-        value={storePhoneNumber}
-        required
-        onChange={(e) => setStorePhoneNumber(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="카테고리"
-        value={category}
-        required
-        onChange={(e) => setCategory(e.target.value)}
-      />
+      <input type="text" placeholder="전화번호" value={storePhoneNumber} required onChange={(e) => setStorePhoneNumber(e.target.value)} />
+      <input type="text" placeholder="카테고리" value={category} required onChange={(e) => setCategory(e.target.value)} />
       <input type="file" placeholder="사진" required onChange={(e) => setImage(e.target.files[0])} />
       <Button
         onClick={
@@ -98,7 +89,7 @@ export default function NewStore({ requestType }) {
         }
         text={requestType ? '생성하기' : '변경하기'}
       />
-      {requestType && <Button onClick={onClickDelBtn} text={'삭제'} />}
+      {!requestType && <Button onClick={onClickDelBtn} text={'삭제'} />}
     </div>
   );
 }
