@@ -68,7 +68,28 @@ export default function NewStore({ requestType }) {
 
   const onClickDelBtn = (e) => {
     e.preventDefault();
-    console.log('딜리트버튼 누르면');
+    try {
+      axios
+        .delete(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${myStore.id}`, { withCredentials: true })
+        .then(function (response) {
+          // handle success
+          console.log(response);
+          alert('가게가 삭제되었습니다.');
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+          alert('삭제오류');
+        });
+
+      window.location.reload();
+
+      // 성공적으로 업로드 후 처리할 로직을 작성하세요.
+    } catch (error) {
+      alert('가게 삭제에 실패했습니다.');
+
+      console.error(error);
+    }
   };
 
   return (
@@ -76,8 +97,20 @@ export default function NewStore({ requestType }) {
       <h1 className="font-bold text-center mx-auto w-fit text-xl">가게 {requestType ? '생성하기' : '변경하기'}</h1>
       <input type="text" placeholder="이름" value={name} required onChange={(e) => setName(e.target.value)} />
       <input type="text" placeholder="위치" value={location} required onChange={(e) => setLocation(e.target.value)} />
-      <input type="text" placeholder="전화번호" value={storePhoneNumber} required onChange={(e) => setStorePhoneNumber(e.target.value)} />
-      <input type="text" placeholder="카테고리" value={category} required onChange={(e) => setCategory(e.target.value)} />
+      <input
+        type="text"
+        placeholder="전화번호"
+        value={storePhoneNumber}
+        required
+        onChange={(e) => setStorePhoneNumber(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="카테고리"
+        value={category}
+        required
+        onChange={(e) => setCategory(e.target.value)}
+      />
       <input type="file" placeholder="사진" required onChange={(e) => setImage(e.target.files[0])} />
       <Button
         onClick={
