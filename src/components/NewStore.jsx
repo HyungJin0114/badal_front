@@ -18,6 +18,7 @@ export default function NewStore({ requestType }) {
       formData.append('name', name);
       formData.append('location', location);
       formData.append('storePhoneNumber', storePhoneNumber);
+      formData.append('category', category);
       formData.append('image', image);
 
       await axios.post(`${process.env.REACT_APP_API_SERVERURL}/api/stores`, formData, {
@@ -45,6 +46,7 @@ export default function NewStore({ requestType }) {
       formData.append('name', name);
       formData.append('location', location);
       formData.append('storePhoneNumber', storePhoneNumber);
+      formData.append('category', category);
       formData.append('image', image);
 
       await axios.patch(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${myStore.id}`, formData, {

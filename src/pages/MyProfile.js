@@ -1,16 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuthContext } from '../context/AuthContext';
 import Loading from '../components/Loading';
 import Button from '../components/ui/Button';
 import StoreInfo from '../components/StoreInfo';
 import { Link } from 'react-router-dom';
+import Modal from 'react-modal';
+import Signup from '../components/Signup';
+
+const customStyles = {
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  content: {
+    width: '80%',
+    'max-width': '450px',
+    position: 'absolute',
+    height: '450px',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: 'white',
+    padding: '1rem',
+    'padding-left': '2rem',
+    'padding-right': '2rem',
+    borderRadius: '0.5rem',
+    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+    animation: 'slide-up 0.5s', // 애니메이션 적용
+  },
+};
+
+// 슬라이드 업 애니메이션을 위한 CSS 키 프레임 정의
+const slideUpAnimation = `
+  @keyframes slide-up {
+    from {
+      transform: translate(-50%, 100%);
+    }
+    to {
+      transform: translateY(-50%, 0);
+    }
+  }
+`;
 
 export default function MyProfile() {
   const { user, isLoading, myStore } = useAuthContext();
-  console.log('aaaaa', user.isAdmin);
-
-  // 유저 업데이트 버튼
-  const onClickUserUpdateBtn = () => {};
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   if (isLoading) {
     return <Loading></Loading>;
@@ -53,7 +86,7 @@ export default function MyProfile() {
           <div className="flex flex-col">
             <p className="font-bold">이름</p> <span className="ms-10">{user.name}</span>
           </div>
-          <Button text={'변경'} onClick={onClickUserUpdateBtn}></Button>
+          <Button text={'변경'} onClick={() => setModalIsOpen(true)}></Button>
         </div>
         <div className="border-b-2 border-slate-300 mb-5"></div>
         {user.isAdmin && (
@@ -77,6 +110,13 @@ export default function MyProfile() {
             </Link>
           </div>
         )}
+        <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} style={customStyles}>
+          <style>{slideUpAnimation}</style>
+          <div className="">
+            {' '}
+            <Signup isUpdateProfile={true} />
+          </div>
+        </Modal>
       </div>
     );
   }

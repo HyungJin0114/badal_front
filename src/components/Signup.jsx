@@ -1,7 +1,8 @@
+import Cookies from 'js-cookie';
 import React, { useState } from 'react';
 // import { onclickEmailConfirmBtn, signupUser } from "../api/auth";
 
-const Signup = () => {
+const Signup = ({ isUpdateProfile }) => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
@@ -22,42 +23,55 @@ const Signup = () => {
     }
     const userData = { name, password, confirmPassword: confirm, email, phoneNumber, nickname, isAdmin, location };
     try {
-      const response = await fetch('http://localhost:3002/api/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
-      });
-
-      if (response.status === 201) {
-        const data = await response.json();
-        alert(data.message);
-        window.location.reload();
+      if (isUpdateProfile) {
+        // 회원 정보 변경
+        // 클릭하면 여기로
       } else {
-        const data = await response.json();
-        alert(data.message);
-        setConfirm('');
-        setEmail('');
-        setIsAdmin(false);
-        setName('');
-        setNickname('');
-        setPassword('');
-        setPhoneNumber('');
-      }
+        // 회원가입
+        const response = await fetch('http://localhost:3002/api/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userData),
+        });
 
-      // 회원가입 성공 시 로그인 처리?
-      // alert(data.userData.nickname, "님의 회원가입 완료!");
+        if (response.status === 201) {
+          const data = await response.json();
+          alert(data.message);
+          window.location.reload();
+        } else {
+          const data = await response.json();
+          alert(data.message);
+          setConfirm('');
+          setEmail('');
+          setIsAdmin(false);
+          setName('');
+          setNickname('');
+          setPassword('');
+          setPhoneNumber('');
+        }
+      }
     } catch (error) {
       alert(error.message);
       console.error('Error occurred during signup:', error);
     }
-    // signupUser(nickname, password, confirm, email, emailConfirm, comment, imgUrl);
+  };
+
+  // 삭제버튼 클릭시 함수
+  const onClickDelBtn = () => {
+    // 삭제 로직 구현
+    console.log('삭제');
+
+    // 쿠키삭제
+    // Cookies.remove('Authorization');
+    // 새로고침
+    // window.location.reload();
   };
 
   return (
-    <div>
-      <h2 className="mb-5 mx-auto text-xl font-bold text-center">회원가입</h2>
+    <div className="flex flex-col">
+      <h2 className="mb-5 mx-auto text-xl font-bold text-center"> {isUpdateProfile ? '회원정보 변경' : '회원가입'}</h2>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <input type="text" placeholder="이름" value={name} required onChange={(e) => setName(e.target.value)} />
         <input type="password" placeholder="비밀번호" value={password} required onChange={(e) => setPassword(e.target.value)} />
@@ -67,24 +81,22 @@ const Signup = () => {
         {/* <input type="text" placeholder="이메일 인증" value={emailConfirm} required onChange={(e) => setEmailConfirm(e.target.value)} /> */}
         <input type="nickname" placeholder="닉네임" value={nickname} onChange={(e) => setNickname(e.target.value)} />
         <input type="text" placeholder="지역" value={location} onChange={(e) => setLocation(e.target.value)} />
-        <div>
-          <span className="me-5">사장님이세요?</span>
-          <input type="checkbox" placeholder="사장님이세요?" value={isAdmin} onChange={(e) => setIsAdmin(e.target.checked)} />
-        </div>
-        {isAdmin && (
+        {!isUpdateProfile && (
           <div>
-            <input type="text" placeholder="name" value={newStore.name} onChange={(e) => setNewStore({ name: e.target.value })} />
-            <input type="text" placeholder="storePhoneNumber" value={newStore.storePhoneNumber} onChange={(e) => setNewStore({ storePhoneNumber: e.target.value })} />
-            <input type="text" placeholder="category" value={newStore.category} onChange={(e) => setNewStore({ category: e.target.value })} />
-            <input type="text" placeholder="location" value={newStore.location} onChange={(e) => setNewStore({ location: e.target.value })} />
-            <input type="text" placeholder="image" value={newStore.image} onChange={(e) => setNewStore({ image: e.target.value })} />
+            <span className="me-5">사장님이세요?</span>
+            <input type="checkbox" placeholder="사장님이세요?" value={isAdmin} onChange={(e) => setIsAdmin(e.target.checked)} />
           </div>
         )}
         {/* <input type="email" placeholder="프로필 이미지" value={imgUrl} onChange={(e) => setImgUrl(e.target.value)} /> */}
         <button className="w-[80%] mx-auto bg-pink-300 py-1.5 rounded-2xl font-bold text-white hover:bg-pink-500" type="submit">
-          회원가입
+          {isUpdateProfile ? '회원정보 변경' : '회원가입'}
         </button>
       </form>
+      {isUpdateProfile && (
+        <button className="my-3 w-[80%] mx-auto bg-pink-300 py-1.5 rounded-2xl font-bold text-white hover:bg-pink-500" onClick={onClickDelBtn}>
+          {'회원 삭제'}
+        </button>
+      )}
     </div>
   );
 };
