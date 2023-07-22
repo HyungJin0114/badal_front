@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useAuthContext } from "../context/AuthContext";
 
-export default function MenuUpload({ requestType }) {
+export default function MenuUpload({ requestType, menuId }) {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const { myStore } = useAuthContext();
-
+  console.log(menuId)
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setImage(file);
@@ -23,16 +23,30 @@ export default function MenuUpload({ requestType }) {
       formData.append("price", price);
       formData.append("description", description);
       formData.append("image", image);
+      console.log(requestType)
+      if(requestType === "POST"){
+        await axios.post(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${myStore.id}/menus`, formData, {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+  
+        alert("메뉴가 업로드되었습니다.");
+        // 성공적으로 업로드 후 처리할 로직을 작성하세요.
+      }else{
+        await axios.put(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${myStore.id}/menus/${menuId}`, formData, {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+  
+        alert("메뉴가 수정되었습니다.");
+        // 성공적으로 업로드 후 처리할 로직을 작성하세요.
+      }
 
-      await axios.post(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${myStore.id}/menus`, formData, {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      alert("메뉴가 업로드되었습니다.");
-      // 성공적으로 업로드 후 처리할 로직을 작성하세요.
+    
     } catch (error) {
       alert("메뉴 업로드에 실패했습니다.");
       console.error(error);
