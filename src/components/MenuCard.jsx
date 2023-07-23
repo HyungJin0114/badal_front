@@ -63,7 +63,9 @@ export default function MenuCard({ menu, admin, storeId }) {
   const onClickDelMenuBtn = async () => {
     try {
       axios
-        .delete(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${storeId}/menus/${menu.id}`, { withCredentials: true })
+        .delete(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${storeId}/menus/${menu.id}`, {
+          withCredentials: true,
+        })
         .then(function (response) {
           // handle success
           console.log(response);
@@ -88,7 +90,7 @@ export default function MenuCard({ menu, admin, storeId }) {
     <div>
       <div className="py-8 px-2 sm:px-8 mx-auto flex flex-row bg-white ">
         <img className="block mx-0 w-[120px] h-[80px] rounded-xl" src={`${menu.image}`} alt="menu" />
-        <div className="text-center mx-4 my-auto">
+        <div className="text-left mx-4 my-auto">
           <div className="space-y-0.5">
             <p className="text-lg text-black font-semibold">{menu.menuName}</p>
             <p className="text-slate-500 font-medium">{menu.price}원</p>

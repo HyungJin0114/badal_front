@@ -78,10 +78,10 @@ export default function UserOrdered() {
         <BorderBarUi></BorderBarUi>
 
         {orders &&
-          orders.map((order) => {
+          orders.map((order, i) => {
             return (
               <div className="my-2 border-b rounded-md border-slate-300" key={order.id}>
-                <h1 className="text-center text-lg font-bold">{order.id}번째 주문</h1>
+                <h1 className="text-center text-lg font-bold">{i + 1}번째 주문</h1>
                 {order.OrderMenus &&
                   order.OrderMenus.map((menu) => {
                     return (

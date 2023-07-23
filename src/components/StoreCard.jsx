@@ -7,7 +7,7 @@ export default function StoreCard({ id, name, location, category, image }) {
     navigate(`/stores/${id}`);
   };
   return (
-    <div>
+    <div key={id}>
       <div
         onClick={onClickStoreCard}
         className="py-8 px-8 mx-auto max-h-40 flex flex-row bg-white rounded-xl shadow-md transition delay-100 cursor-pointer hover:bg-pink-100 hover:shadow-xl"

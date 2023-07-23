@@ -119,7 +119,10 @@ export default function Stores() {
         <div className="flex flex-col gap-4  border-b-2 pb-4">
           <img className="rounded-t-xl mx-0 w-full max-h-40" src={storeInfo.image} alt="" />
           <h1 className="text-2xl font-bold mx-3">{storeInfo.name}</h1>
-          <p onClick={() => setModalIsOpen(true)} className="font-semibold w-fit mx-3 cursor-pointer transition hover:translate-x-2">
+          <p
+            onClick={() => setModalIsOpen(true)}
+            className="font-semibold w-fit mx-3 cursor-pointer transition hover:translate-x-2"
+          >
             ⭐ 4.2 <span className="text-slate-500 ">{'리뷰 >'}</span>
           </p>
         </div>
@@ -133,11 +136,20 @@ export default function Stores() {
         </div>
         <div className="py-4">
           <h1 className="text-xl font-bold mx-3">{storeInfo.name}의 메뉴</h1>
-          {myStore && myStore.id === storeInfo.id && <Button onClick={() => setMenuModalIsOpen(true)} text={'메뉴추가'} />}
+          {myStore && myStore.id === storeInfo.id && (
+            <Button onClick={() => setMenuModalIsOpen(true)} text={'메뉴추가'} />
+          )}
           <div className="flex flex-col gap-3">
             {menu &&
               menu.map((menu) => {
-                return <MenuCard key={menu.id} admin={myStore && myStore.id === storeInfo.id} menu={menu} storeId={storeId} />;
+                return (
+                  <MenuCard
+                    key={menu.id}
+                    admin={myStore && myStore.id === storeInfo.id}
+                    menu={menu}
+                    storeId={storeId}
+                  />
+                );
               })}
           </div>
         </div>
