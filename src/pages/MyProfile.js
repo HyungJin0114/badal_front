@@ -84,7 +84,7 @@ export default function MyProfile() {
         </div>
         <div className="flex flex-row  items-center text-lg justify-between">
           <div className="flex flex-col">
-            <p className="font-bold">이름</p> <span className="ms-10">{user.name}</span>
+            <p className="font-bold">지역</p> <span className="ms-10">{user.location}</span>
           </div>
           <Button text={'변경'} onClick={() => setModalIsOpen(true)}></Button>
         </div>

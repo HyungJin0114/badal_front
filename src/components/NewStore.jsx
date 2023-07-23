@@ -104,13 +104,12 @@ export default function NewStore({ requestType }) {
         required
         onChange={(e) => setStorePhoneNumber(e.target.value)}
       />
-      <input
-        type="text"
-        placeholder="카테고리"
-        value={category}
-        required
-        onChange={(e) => setCategory(e.target.value)}
-      />
+      <select id="country" onChange={(e) => setCategory(e.target.value)} name="country">
+        <option value="양식">양식</option>
+        <option value="한식">한식</option>
+        <option value="일식">일식</option>
+        <option value="중식">중식</option>
+      </select>
       <input type="file" placeholder="사진" required onChange={(e) => setImage(e.target.files[0])} />
       <Button
         onClick={

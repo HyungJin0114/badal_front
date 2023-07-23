@@ -1,9 +1,12 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import Button from '../ui/Button';
 
 export default function CreateReview({ orderId, reviewId, newStoreId, requestType }) {
   const [content, setContent] = useState();
   const [rating, setRating] = useState();
+
+  const onClickDelBtn = async (e) => {};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,8 +59,10 @@ export default function CreateReview({ orderId, reviewId, newStoreId, requestTyp
   };
 
   return (
-    <div>
-      <h1 className="text-center text-xl font-bold mb-10">{requestType === 'POST' ? '리뷰 등록하기' : '리뷰 수정하기'}</h1>
+    <div className="">
+      <h1 className="text-center text-xl font-bold mb-10">
+        {requestType === 'POST' ? '리뷰 등록하기' : '리뷰 수정하기'}
+      </h1>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <input type="text" placeholder="별점" value={rating} required onChange={(e) => setRating(e.target.value)} />
         {/* <div className="flex items-center space-x-3">
@@ -79,10 +84,14 @@ export default function CreateReview({ orderId, reviewId, newStoreId, requestTyp
         </div> */}
         <input type="text" placeholder="리뷰" value={content} required onChange={(e) => setContent(e.target.value)} />
 
-        <button className="w-[80%] mx-auto bg-pink-300 py-1.5 rounded-2xl font-bold text-white hover:bg-pink-500" type="submit">
+        <button
+          className="w-[80%] mx-auto bg-pink-300 py-1.5 rounded-2xl font-bold text-white hover:bg-pink-500"
+          type="submit"
+        >
           {requestType === 'PUT' ? '리뷰 변경' : '리뷰 등록'}
         </button>
       </form>
+      {requestType === 'PUT' && <Button onClick={onClickDelBtn} text={'리뷰 삭제'} />}
     </div>
   );
 }
