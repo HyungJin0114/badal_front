@@ -26,7 +26,7 @@ export default function Payments() {
 
       if (response.status) {
         alert('주문이 완료됐습니다!');
-        window.location.reload();
+        window.location.href = '/userOrdered';
       } else if (response.status) {
         alert('잔액부족!');
         window.location.reload();
@@ -41,7 +41,10 @@ export default function Payments() {
     <div>
       <Cart />{' '}
       {totalPrice !== 0 && (
-        <button onClick={onClickPaymentsBtn} className="flex w-fit text-xl text-center mx-auto py-1 px-2 rounded-xl font-bold text-white bg-pink-300 hover:bg-pink-500">
+        <button
+          onClick={onClickPaymentsBtn}
+          className="flex w-fit text-xl text-center mx-auto py-1 px-2 rounded-xl font-bold text-white bg-pink-300 hover:bg-pink-500"
+        >
           {totalPrice + '원 주문하기'}
         </button>
       )}

@@ -1,6 +1,5 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 import CartProvider from './context/CartContext';
 import { useEffect } from 'react';
 import { AuthContextProvider } from './context/AuthContext';
@@ -20,14 +19,13 @@ function App() {
       <ScrollToTop />
       <AuthContextProvider>
         <CartProvider>
-          <div className="max-w-md min-w-[348px] mx-auto border border-slate-300 rounded-md p-4 pb-0">
+          <div className="max-w-md min-w-[348px] min-h-[100vh] mx-auto border border-slate-300 rounded-md p-4 pb-0">
             <header className="">
               <Navbar />
             </header>
-            <div className="py-2">
+            <div className=" py-4">
               <Outlet />
             </div>
-            <Footer />
           </div>
         </CartProvider>
       </AuthContextProvider>

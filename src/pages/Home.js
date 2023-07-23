@@ -19,7 +19,6 @@ export default function Home() {
         });
 
         if (response.status === 200) {
-          console.log(response.data.result);
           setResult(response.data.result);
         } else {
           alert(response.data.message);
@@ -40,7 +39,16 @@ export default function Home() {
       <div className="flex flex-col gap-4">
         {result &&
           result.map((data) => {
-            return <StoreCard id={data.id} category={data.category} img={data.img} location={data.location} name={data.name} key={data.id} />;
+            return (
+              <StoreCard
+                id={data.id}
+                category={data.category}
+                image={data.image}
+                location={data.location}
+                name={data.name}
+                key={data.id}
+              />
+            );
           })}
       </div>
     </div>
