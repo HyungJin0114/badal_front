@@ -37,6 +37,8 @@ const Signup = ({ isUpdateProfile }) => {
         );
 
         alert('내 정보가 수정되었습니다.');
+        window.location.reload();
+
         // 성공적으로 업로드 후 처리할 로직을 작성하세요.
       } else {
         // 회원가입
