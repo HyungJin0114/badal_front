@@ -11,7 +11,7 @@ const customStyles = {
   },
   content: {
     width: '80%',
-    'max-width': '500px',
+    maxWidth: '500px',
     height: '450px',
     position: 'absolute',
     top: '50%',
@@ -19,8 +19,8 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
     backgroundColor: 'white',
     padding: '1rem',
-    'padding-left': '2rem',
-    'padding-right': '2rem',
+    paddingLeft: '2rem',
+    paddingRight: '2rem',
     borderRadius: '0.5rem',
     boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
     animation: 'slide-up 0.5s', // 애니메이션 적용
@@ -67,7 +67,10 @@ export default function CartButton() {
         <style>{slideUpAnimation}</style>
         <Cart setModalIsOpen={setModalIsOpen} />
         {totalPrice !== 0 && (
-          <Link to="/payments" className="flex w-fit text-xl text-center mx-auto py-1 px-2 rounded-xl font-bold text-white bg-pink-300 hover:bg-pink-500">
+          <Link
+            to="/payments"
+            className="flex w-fit text-xl text-center mx-auto py-1 px-2 rounded-xl font-bold text-white bg-pink-300 hover:bg-pink-500"
+          >
             {totalPrice + '원 주문하기'}
           </Link>
         )}

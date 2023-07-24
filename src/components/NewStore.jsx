@@ -7,7 +7,7 @@ export default function NewStore({ requestType }) {
   const [name, setName] = useState('');
   const [location, setLocation] = useState('');
   const [storePhoneNumber, setStorePhoneNumber] = useState('');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState('양식');
   const [image, setImage] = useState();
   const { myStore } = useAuthContext();
 
@@ -104,7 +104,10 @@ export default function NewStore({ requestType }) {
         required
         onChange={(e) => setStorePhoneNumber(e.target.value)}
       />
-      <select id="country" onChange={(e) => setCategory(e.target.value)} name="country">
+      <select id="country" defaultValue={'양식'} onChange={(e) => setCategory(e.target.value)} name="country">
+        <option disabled value="선택">
+          선택
+        </option>
         <option value="양식">양식</option>
         <option value="한식">한식</option>
         <option value="일식">일식</option>

@@ -33,6 +33,8 @@ export default function MenuUpload({ requestType, menuId }) {
         });
 
         alert('메뉴가 업로드되었습니다.');
+        window.location.reload();
+
         // 성공적으로 업로드 후 처리할 로직을 작성하세요.
       } else {
         await axios.put(`${process.env.REACT_APP_API_SERVERURL}/api/stores/${myStore.id}/menus/${menuId}`, formData, {
@@ -43,6 +45,8 @@ export default function MenuUpload({ requestType, menuId }) {
         });
 
         alert('메뉴가 수정되었습니다.');
+        window.location.reload();
+
         // 성공적으로 업로드 후 처리할 로직을 작성하세요.
       }
     } catch (error) {
